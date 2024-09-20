@@ -320,6 +320,11 @@ return [
             'url' => 'gallery',
             'icon' => 'far fa-fw fa-image',
         ],
+        [
+            'text' => 'Content',
+            'url' => 'content',
+            'icon' => 'fa-solid fa-layer-group',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

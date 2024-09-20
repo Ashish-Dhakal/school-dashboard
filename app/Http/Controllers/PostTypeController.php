@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Content;
+use App\Models\PostType;
 use Illuminate\Http\Request;
 
-class ContentController extends Controller
+class PostTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('content.index');
+        //
     }
 
     /**
@@ -20,7 +20,7 @@ class ContentController extends Controller
      */
     public function create()
     {
-        return view('content.create');
+        //
     }
 
     /**
@@ -28,13 +28,13 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Content $content)
+    public function show(PostType $postType)
     {
         //
     }
@@ -42,7 +42,7 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Content $content)
+    public function edit(PostType $postType)
     {
         //
     }
@@ -50,7 +50,7 @@ class ContentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Content $content)
+    public function update(Request $request, PostType $postType)
     {
         //
     }
@@ -58,7 +58,7 @@ class ContentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Content $content)
+    public function destroy(PostType $postType)
     {
         //
     }
