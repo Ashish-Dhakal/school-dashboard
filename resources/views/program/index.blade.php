@@ -16,21 +16,41 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Slug</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Sub Description</th>
+                    <th scope="col">Galleries</th>
+                    <th scope="col">Post Types</th>
+                    <th scope="col">Feature Image</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($programs as $program)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $program->title }}</td>
+                        <td>{{ $program->slug }}</td>
+                        <td>{{ $program->description }}</td>
+                        <td>{{ $program->sub_desc }}</td>
+                        <td>{{ $program->gallery->gallery_name??'-'}}</td>
+                        <td>{{ $program->postType->name??'-' }}</td>
+                        <td><img src="{{ asset('images/' . $program->feature_image) }}" alt="Feature Image" style="max-width: 100px;"></td>
 
-                <tr>
-                    <td>hrllo</td>
-                    <td>hello</td>
-                    <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
-
-                    </td>
-                </tr>
+                        <td> acti0n
+                            {{-- <a href="{{ route('program.edit', $program->id) }}"
+                                class="btn btn
+                    info">Edit</a>
+                            <form action="{{ route('program.destroy', $program->id) }}" method="POST"
+                                style="display: inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form> --}}
+                        </td>
+                    </tr>
+                @endforeach
 
                 <!-- Add more rows as needed -->
             </tbody>

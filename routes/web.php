@@ -41,6 +41,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [ProgramController::class, 'index'])->name('index');
         Route::get('/create', [ProgramController::class, 'create'])->name('create');
         Route::post('/store', [ProgramController::class, 'store'])->name('store');
+        Route::get('/edit/{slug}', [ProgramController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [ProgramController::class, 'update'])->name('update');
+        Route::delete('/destroy/{slug}', [ProgramController::class, 'destroy'])->name('destroy');
+
+
+
     });
 
 

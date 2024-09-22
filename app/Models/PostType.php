@@ -11,6 +11,11 @@ class PostType extends Model
     protected $fillable = [
         'name',
         'slug',
-        ];
+    ];
 
+       // One-to-many relationship with Content
+       public function contents()
+       {
+           return $this->hasMany(Content::class, 'post_types_id');
+       }
 }

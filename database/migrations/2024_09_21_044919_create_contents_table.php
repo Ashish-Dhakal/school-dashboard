@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('sub_desc')->nullable();
+            $table->text('sub_desc')->nullable(); // Change from string to text
             $table->unsignedBigInteger('galleries_id')->nullable();
             $table->foreign('galleries_id')->references('id')->on('galleries');
             $table->string('feature_image')->nullable();

@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ImageGallery extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'galleries_id',
+        'status',
+    ];
+
+    // Defining the relationship with the Gallery
+    public function gallery()
+    {
+        return $this->belongsTo(Gallery::class, 'galleries_id');
+    }
 }

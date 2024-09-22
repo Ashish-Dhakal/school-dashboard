@@ -11,4 +11,16 @@ class Gallery extends Model
     protected $fillable = [
         'gallery_name',
     ];
+
+    // One-to-many relationship with Content
+    public function contents()
+    {
+        return $this->hasMany(Content::class, 'galleries_id');
+    }
+
+    // One-to-many relationship with ImageGallery
+    public function imageGalleries()
+    {
+        return $this->hasMany(ImageGallery::class, 'galleries_id');
+    }
 }

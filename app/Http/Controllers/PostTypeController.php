@@ -15,7 +15,7 @@ class PostTypeController extends BaseController
      */
     public function index()
     {
-        $data = $this->fetch_all_program();
+        $data = $this->fetch_all_postType();
         return view('post-type.index', $data);
     }
 
