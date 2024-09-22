@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ContentController;
-use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\PostTypeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,13 +14,43 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
-Route::post('/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+Route::middleware(['auth'])->group(function () {
 
-// Route::get('/gallery',::class, 'index')->name('gallery.index');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// route for the content
-Route::get('/content', [ContentController::class, 'index'])->name('content.index');
-Route::get('/content/create', [ContentController::class, 'create'])->name('content.create');
-Route::post('/content/store', [ContentController::class, 'store'])->name('content.store');
+    // route for the gallery
+    Route::prefix('/gallery')->name('gallery.')->group(function () {
+        Route::get('/', [GalleryController::class, 'index'])->name('index');
+        Route::post('/store', [GalleryController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [GalleryController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [GalleryController::class, 'update'])->name('update');
+        Route::delete('/destroy/{id}', [GalleryController::class, 'destroy'])->name('destroy');
+    });
+
+
+    // route for the content
+    Route::prefix('/content')->name('content.')->group(function () {
+        Route::get('/', [ContentController::class, 'index'])->name('index');
+        Route::get('/create', [ContentController::class, 'create'])->name('create');
+        Route::post('/store', [ContentController::class, 'store'])->name('store');
+    });
+
+
+    // route for the program
+    Route::prefix('/program')->name('program.')->group(function () {
+        Route::get('/', [ProgramController::class, 'index'])->name('index');
+        Route::get('/create', [ProgramController::class, 'create'])->name('create');
+        Route::post('/store', [ProgramController::class, 'store'])->name('store');
+    });
+
+
+    // route for the postType
+    Route::prefix('/post-type')->name('postType.')->group(function () {
+        Route::get('/', [PostTypeController::class, 'index'])->name('index');
+        Route::get('/create', [PostTypeController::class, 'create'])->name('create');
+        Route::get('/edit/{slug}', [PostTypeController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [PostTypeController::class, 'update'])->name('update');
+        Route::post('/store', [PostTypeController::class, 'store'])->name('store');
+        Route::delete('/destroy/{slug}', [PostTypeController::class, 'destroy'])->name('destroy');
+    });
+});

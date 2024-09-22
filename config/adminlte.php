@@ -316,15 +316,26 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'Gallery',
+            'text' => ' Post Type',
+            'url' => 'post-type',
+            'icon' => 'fas fa-paste',
+        ],
+        [
+            'text' => ' Gallery',
             'url' => 'gallery',
             'icon' => 'far fa-fw fa-image',
         ],
         [
-            'text' => 'Content',
+            'text' => ' Content',
             'url' => 'content',
             'icon' => 'fa-solid fa-layer-group',
         ],
+        [
+            'text' => ' Program',
+            'url' => 'program',
+            'icon' => 'fas fa-book',
+        ],
+     
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

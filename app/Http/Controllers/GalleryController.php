@@ -13,8 +13,8 @@ class GalleryController extends Controller
     public function index()
     {
         // select the only gallery_name only from gallery database
-        $data['galleries'] = Gallery::select('gallery_name')->paginate(4);
-        return view('gallery.index',$data);
+        $data['galleries'] = Gallery::paginate(4);
+        return view('gallery.index', $data);
     }
 
     /**
@@ -53,24 +53,36 @@ class GalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gallery $gallery)
+
+    public function edit($id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);  // Ensure this is fetching the correct gallery record
+        return view('gallery.edit', compact('gallery'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, Gallery $gallery, $id)
     {
-        //
+        // validate the input data and save to database
+        $request->validate([
+            'gallery_name' => 'required|max:30|min:5|unique:galleries,gallery_name'
+        ]);
+
+        Gallery::where('id', $id)->update([
+            'gallery_name' => $request->gallery_name
+        ]);
+        return redirect()->route('gallery.index')->with('success', 'Gallery updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Gallery $gallery)
+    public function destroy(Gallery $gallery, $id)
     {
-        //
+        // delete the gallery row havig  the $id
+        Gallery::destroy($id);
+        return redirect()->back()->with('success', 'Gallery deleted successfully!');
     }
 }
