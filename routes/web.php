@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProgramController;
@@ -35,21 +36,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store', [ContentController::class, 'store'])->name('store');
     });
 
-
-    // route for the program
-    Route::prefix('/program')->name('program.')->group(function () {
-        Route::get('/', [ProgramController::class, 'index'])->name('index');
-        Route::get('/create', [ProgramController::class, 'create'])->name('create');
-        Route::post('/store', [ProgramController::class, 'store'])->name('store');
-        Route::get('/edit/{slug}', [ProgramController::class, 'edit'])->name('edit');
-        Route::post('/update/{slug}', [ProgramController::class, 'update'])->name('update');
-        Route::delete('/destroy/{slug}', [ProgramController::class, 'destroy'])->name('destroy');
-
-
-
-    });
-
-
     // route for the postType
     Route::prefix('/post-type')->name('postType.')->group(function () {
         Route::get('/', [PostTypeController::class, 'index'])->name('index');
@@ -58,5 +44,25 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/{slug}', [PostTypeController::class, 'update'])->name('update');
         Route::post('/store', [PostTypeController::class, 'store'])->name('store');
         Route::delete('/destroy/{slug}', [PostTypeController::class, 'destroy'])->name('destroy');
+    });
+
+       // route for the program
+       Route::prefix('/program')->name('program.')->group(function () {
+        Route::get('/', [ProgramController::class, 'index'])->name('index');
+        Route::get('/create', [ProgramController::class, 'create'])->name('create');
+        Route::post('/store', [ProgramController::class, 'store'])->name('store');
+        Route::get('/edit/{slug}', [ProgramController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [ProgramController::class, 'update'])->name('update');
+        Route::delete('/destroy/{slug}', [ProgramController::class, 'destroy'])->name('destroy');
+    });
+
+       // route for the about
+       Route::prefix('/about')->name('about.')->group(function () {
+        Route::get('/', [AboutController::class, 'index'])->name('index');
+        Route::get('/create', [AboutController::class, 'create'])->name('create');
+        Route::post('/store', [AboutController::class, 'store'])->name('store');
+        Route::get('/edit/{slug}', [AboutController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [AboutController::class, 'update'])->name('update');
+        Route::delete('/destroy/{slug}', [AboutController::class, 'destroy'])->name('destroy');
     });
 });

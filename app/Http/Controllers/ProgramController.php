@@ -13,9 +13,10 @@ class ProgramController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {    $data['programs'] = Content::where('post_types_id', 1)->get();
+    {
+        $data['programs'] = Content::where('post_types_id', 1)->get();
 
-        return view('program.index',$data);
+        return view('program.index', $data);
     }
 
     /**
@@ -36,7 +37,7 @@ class ProgramController extends Controller
     {
 
         $validatedData = $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:50',
             'description' => 'required',
             'sub_desc' => 'required',
             'galleries_id' => 'required',
@@ -63,17 +64,17 @@ class ProgramController extends Controller
         $content->galleries_id = $validatedData['galleries_id'];
         $content->post_types_id = $validatedData['post_types_id'];
         $content->feature_image = $validatedData['feature_image'];
-        
+
         if ($request->hasFile('feature_image')) {
             $image = $request->file('feature_image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $image_name);
-            
+
             // Save only the image file name in the database
             $content->feature_image = $image_name;
         }
         $content->save();
-        
+
         return redirect()->route('program.index')->with('success', 'Program created successfully');
     }
 
@@ -91,18 +92,68 @@ class ProgramController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($slug)
     {
-        //
+        $data['posttypes'] = PostType::all();
+        $data['galleries'] = Gallery::all();
+        $data['program'] = Content::where('slug', $slug)->firstOrFail();
+        return view('program.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $slug)
     {
-        //
+        // Find the content by its slug
+        $content = Content::where('slug', $slug)->firstOrFail();
+
+        // Validate the request data, making 'feature_image' nullable
+        $validatedData = $request->validate([
+            'title' => 'required|max:50',
+            'description' => 'required',
+            'sub_desc' => 'required',
+            'galleries_id' => 'required',
+            'post_types_id' => 'required',
+            'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp', // Nullable here
+        ]);
+
+        // Update the content fields
+        $content->title = $validatedData['title'];
+        $content->description = $validatedData['description'];
+        $content->sub_desc = $validatedData['sub_desc'];
+        $content->galleries_id = $validatedData['galleries_id'];
+        $content->post_types_id = $validatedData['post_types_id'];
+
+        // Handle the feature image update only if a new file is uploaded
+        if ($request->hasFile('feature_image')) {
+            // Get the new image file
+            $image = $request->file('feature_image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+
+            // Move the new image to the public path
+            $image->move(public_path('images'), $image_name);
+
+            // Optionally delete the old image file if it exists
+            if ($content->feature_image && file_exists(public_path('images/program/' . $content->feature_image))) {
+                unlink(public_path('images' . $content->feature_image));
+            }
+
+            // Update the feature_image field with the new image name
+            $content->feature_image = $image_name;
+        } else {
+            // Retain the current image if no new image is uploaded (use hidden field)
+            $content->feature_image = $request->input('current_image');
+        }
+
+        // Save the updated content
+        $content->save();
+
+        return redirect()->route('program.index')->with('success', 'Program updated successfully');
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
