@@ -15,7 +15,7 @@ class ProgramController extends Controller
     public function index()
     {
         // $data['programs'] = Content::where('post_types_id', 6)->get();
-        $data['programs'] = Content::whereHas('postType', function($query) {
+        $data['programs'] = Content::whereHas('postType', function ($query) {
             $query->where('slug', 'program');
         })->get();
 
@@ -28,7 +28,7 @@ class ProgramController extends Controller
     public function create()
     {
         // retrive all the posttype name
-        $data['posttype'] = PostType::where('name', 'program')->get();
+        $data['posttype'] = PostType::where('name', 'Program')->get();
         $data['galleries'] = Gallery::all();
         return view('program.create', $data);
     }
@@ -97,7 +97,7 @@ class ProgramController extends Controller
      */
     public function edit($slug)
     {
-        $data['posttype'] = PostType::where('name', 'program')->get();
+        $data['posttype'] = PostType::where('name', 'Program')->get();
 
         $data['galleries'] = Gallery::all();
         $data['program'] = Content::where('slug', $slug)->firstOrFail();
@@ -117,7 +117,7 @@ class ProgramController extends Controller
             'title' => 'required|max:50',
             'description' => 'required',
             'sub_desc' => 'required',
-            'galleries_id' => 'required',
+            'galleries_id' => '',
             'post_types_id' => 'required',
             'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp', // Nullable here
         ]);
@@ -162,8 +162,16 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function destroy($slug)
     {
-        //
+        $content = Content::where('slug', $slug)->first();
+
+        if ($content) {
+            $content->delete();
+            return redirect()->route('program.index')->with('success','Content deleted successfully.');
+        }
+
+        return redirect()->route('program.index')->with('error' , 'Content not found.');
     }
 }

@@ -3,14 +3,14 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Program')
+@section('content_header_title', 'About')
 {{-- @section('content_header_subtitle', '') --}}
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
 
-        <a href="{{ route('program.create') }}" class="btn btn-primary"> Add Content</a>
+        <a href="{{ route('about.create') }}" class="btn btn-primary"> Add Content</a>
         <!-- Bootstrap Table -->
         <table class="table table-striped table-bordered mt-4">
             <thead class="thead-dark">
@@ -27,22 +27,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($programs as $program)
+                @foreach ($abouts as $about)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $program->title }}</td>
-                        <td>{{ $program->slug }}</td>
-                        <td>{{ $program->description }}</td>
-                        <td>{{ $program->sub_desc }}</td>
-                        <td>{{ $program->gallery->gallery_name??'-'}}</td>
-                        <td>{{ $program->postType->name??'-' }}</td>
-                        <td><img src="{{ asset('images/' . $program->feature_image) }}" alt="Feature Image" style="max-width: 100px;"></td>
+                        <td>{{ $about->title }}</td>
+                        <td>{{ $about->slug }}</td>
+                        <td>{{ $about->description }}</td>
+                        <td>{{ $about->sub_desc }}</td>
+                        <td>{{ $about->gallery->gallery_name??'-'}}</td>
+                        <td>{{ $about->postType->name??'-' }}</td>
+                        <td><img src="{{ asset('images/' . $about->feature_image) }}" alt="Feature Image" style="max-width: 100px;"></td>
 
                         <td> 
                             <div class="d-flex">
-                                <a href="{{ route('program.edit', $program->slug) }}"
+                                <a href="{{ route('about.edit', $about->slug) }}"
                                     class="btn btn-primary">Edit</a>
-                                <form action="{{ route('program.destroy', $program->slug) }}" method="POST"
+                                <form action="{{ route('about.destroy', $about->slug) }}" method="POST"
                                     style="display: inline-block">
                                     @csrf
                                     @method('DELETE')

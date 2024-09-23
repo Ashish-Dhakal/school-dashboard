@@ -335,6 +335,12 @@ return [
             'url' => 'program',
             'icon' => 'fas fa-book',
         ],
+        [
+            'text' => ' About Us',
+            'url' => 'about',
+            'icon' => 'fas fa-book',
+        ],
+     
      
         ['header' => 'account_settings'],
         [
