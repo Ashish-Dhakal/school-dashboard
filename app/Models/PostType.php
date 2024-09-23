@@ -18,4 +18,6 @@ class PostType extends Model
        {
            return $this->hasMany(Content::class, 'post_types_id');
        }
+
+
 }

@@ -22,7 +22,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" value="{{old('title')}}" name="title" placeholder="Enter title">
+                        <input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title"
+                            placeholder="Enter title">
                     </div>
                 </div>
 
@@ -38,7 +39,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{old('description')}}</textarea>
+                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="sub_desc">Sub Description</label>
-                        <textarea class="form-control" id="sub_desc" name="sub_desc" placeholder="Enter sub description">{{old('sub_desc')}}</textarea>
+                        <textarea class="form-control" id="sub_desc" name="sub_desc" placeholder="Enter sub description">{{ old('sub_desc') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -59,19 +60,22 @@
                         <select class="form-control" id="galleries_id" name="galleries_id">
                             <option value="">Select Gallery</option>
                             @foreach ($galleries as $gallery)
-                            <option value="{{ $gallery->id }}">{{ $gallery->gallery_name }}</option>
+                                <option value="{{ $gallery->id }}">{{ $gallery->gallery_name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
+                
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="post_types_id">Post Types</label>
                         <select class="form-control" id="post_types_id" name="post_types_id">
-                            <option value="">Select Post Type</option>
-                            @foreach ($posttypes as $posttype)
+                            <option value="{{ $posttype->pluck('id')->implode(',') }}">
+                                {{ $posttype->pluck('slug')->implode(' ') }}
+                            </option>                            {{--    @foreach ($posttypes as $posttype)
                             <option value="{{ $posttype->id }}">{{ $posttype->name }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>

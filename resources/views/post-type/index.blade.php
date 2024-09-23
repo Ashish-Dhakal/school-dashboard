@@ -19,7 +19,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Pin to side bar</th>
                     <th scope="col">Action</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +29,11 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $postType->name }}</td>
+                          <!-- Checkbox for pin_to_sidebar -->
+                          <td>
+                            <input type="checkbox" class="pin-checkbox" data-id="{{ $postType->id }}"
+                                {{ $postType->is_pinned ? 'checked' : '' }}>
+                        </td>
                         <td>
                             <div class="d-flex">
                                 <a class=" text-decoration-none" href="{{ route('postType.edit', $postType->slug) }}">
@@ -37,10 +44,10 @@
                                     @method('DELETE')
                                     <button class="btn btn-danger mx-3" type="submit">Delete</button>
                                 </form>
-                                
+
 
                             </div>
-                          
+
                         </td>
                     </tr>
                 @endforeach
@@ -94,7 +101,29 @@
 
 {{-- Push extra JS --}}
 @push('js')
-    <script>
-        console.log("Hi, I'm using the Laravel-AdminLTE package!");
-    </script>
+<script>
+    // Handle the pin checkbox change event
+    $('.pin-checkbox').on('change', function() {
+        var postTypeId = $(this).data('id');
+        var isChecked = $(this).is(':checked') ? 1 : 0;
+
+        // Send an AJAX request to update the status in the database
+        $.ajax({
+            url: '{{ route('postType.updatePinStatus') }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: postTypeId,
+                pin_to_sidebar: isChecked
+            },
+            success: function(response) {
+                // Optionally show a message or update UI
+                console.log(response.message);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+</script>
 @endpush

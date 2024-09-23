@@ -14,7 +14,10 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $data['programs'] = Content::where('post_types_id', 1)->get();
+        // $data['programs'] = Content::where('post_types_id', 6)->get();
+        $data['programs'] = Content::whereHas('postType', function($query) {
+            $query->where('slug', 'program');
+        })->get();
 
         return view('program.index', $data);
     }
@@ -25,7 +28,7 @@ class ProgramController extends Controller
     public function create()
     {
         // retrive all the posttype name
-        $data['posttypes'] = PostType::all();
+        $data['posttype'] = PostType::where('name', 'program')->get();
         $data['galleries'] = Gallery::all();
         return view('program.create', $data);
     }
@@ -40,7 +43,7 @@ class ProgramController extends Controller
             'title' => 'required|max:50',
             'description' => 'required',
             'sub_desc' => 'required',
-            'galleries_id' => 'required',
+            'galleries_id' => '',
             'post_types_id' => 'required',
             'feature_image' => 'required|mimes:jpg,jpeg,png,gif,bmp',
         ]);
@@ -94,7 +97,8 @@ class ProgramController extends Controller
      */
     public function edit($slug)
     {
-        $data['posttypes'] = PostType::all();
+        $data['posttype'] = PostType::where('name', 'program')->get();
+
         $data['galleries'] = Gallery::all();
         $data['program'] = Content::where('slug', $slug)->firstOrFail();
         return view('program.edit', $data);

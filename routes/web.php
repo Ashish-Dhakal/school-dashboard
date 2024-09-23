@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/{slug}', [PostTypeController::class, 'update'])->name('update');
         Route::post('/store', [PostTypeController::class, 'store'])->name('store');
         Route::delete('/destroy/{slug}', [PostTypeController::class, 'destroy'])->name('destroy');
+        route::post('/updatePinStatus', [PostTypeController::class, 'updatePinStatus'])->name('updatePinStatus');
     });
 
        // route for the program

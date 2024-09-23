@@ -88,15 +88,16 @@
 
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="post_types_id">Post Types</label>
                         <select class="form-control" id="post_types_id" name="post_types_id">
-                            <option value="{{ $program->posttype?->id ?? '' }}">
-                                {{ $program->postType ? $program->postType->name : 'Select the Post Type' }}</option>
-                            @foreach ($posttypes as $posttype)
-                                <option value="{{ $posttype->id }}">{{ $posttype->name }}</option>
-                            @endforeach
+                            <option value="{{ $posttype->pluck('id')->implode(',') }}">
+                                {{ $posttype->pluck('slug')->implode(' ') }}
+                            </option>                            {{--    @foreach ($posttypes as $posttype)
+                            <option value="{{ $posttype->id }}">{{ $posttype->name }}</option>
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>

@@ -103,4 +103,23 @@ class PostTypeController extends BaseController
         $postType->delete();
         return redirect()->route('postType.index')->with('success', 'Post type deleted successfully');
     }
+
+
+    public function updatePinStatus(Request $request)
+    {
+        // dd('asdfs');
+        // Validate the request
+        $request->validate([
+            'id' => 'required|integer',
+            'pin_to_sidebar' => 'required|boolean',
+        ]);
+
+        // Find the post type by ID and update the pin status
+        $postType = PostType::findOrFail($request->id);
+        $postType->is_pinned = $request->pin_to_sidebar;
+        $postType->save();
+
+        // Return a success response
+        return response()->json(['message' => 'Pin status updated successfully.']);
+    }
 }
