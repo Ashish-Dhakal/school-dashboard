@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\ImageGallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log; // To log errors if needed
+use Exception;
 
 class GalleryController extends Controller
 {
@@ -30,17 +34,60 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        // validate the input data and save to database
+        // Validate the input
         $request->validate([
-            'gallery_name' => 'required|max:30|min:5|unique:galleries,gallery_name'
-        ]);
-        // save teh gallery_name in databse in a individual way
-        Gallery::create([
-            'gallery_name' => $request->gallery_name
+            'gallery_name' => 'required|string|max:255',
+            'images.*' => 'image|mimes:jpg,jpeg,png,gif,bmp|max:2048', // Validate each image
         ]);
 
-        return redirect()->back()->with('success', 'Gallery created successfully!');
+        // Start a transaction
+        DB::beginTransaction();
+
+        try {
+            // Create the gallery first
+            $gallery = Gallery::create([
+                'gallery_name' => $request->gallery_name,
+            ]);
+
+            // Check if images are uploaded
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    // Store each image in the public directory
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+
+                    // Move image to the public directory
+                    $image->move(public_path('images/gallery'), $imageName);
+
+                    // Ensure the image was successfully uploaded before storing in DB
+                    if ($imageName) {
+                        ImageGallery::create([
+                            'galleries_id' => $gallery->id,
+                            'image' => $imageName,  // Store the image name in the 'image' column
+                        ]);
+                    } else {
+                        // If the image fails to upload, throw an error
+                        throw new Exception('Image upload failed.');
+                    }
+                }
+            }
+
+            // Commit the transaction if everything works fine
+            DB::commit();
+
+            // Redirect with success message
+            return redirect()->route('gallery.index')->with('success', 'Gallery and images uploaded successfully.');
+        } catch (Exception $e) {
+            // Rollback the transaction if any error occurs
+            DB::rollBack();
+
+            // Log the error for debugging
+            Log::error('Gallery creation failed: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return redirect()->back()->withErrors(['error' => 'Gallery creation failed. Please try again.']);
+        }
     }
+
 
     /**
      * Display the specified resource.

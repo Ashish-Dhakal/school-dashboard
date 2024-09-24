@@ -68,13 +68,12 @@
                             <div class="mb-3">
                                 <label for="gallery_name" class="form-label">Gallery Name</label>
                                 <input type="text" class="form-control" name="gallery_name" id="gallery_name"
-                                    placeholder="Gallery Name">
-
-                                {{-- display the error validation message --}}
-
-
+                                       placeholder="Gallery Name">
                             </div>
-                            <!-- Add any other form fields here -->
+                            <div class="mb-3">
+                                <label for="images" class="form-label">Gallery Images</label>
+                                <input type="file" class="form-control" name="images[]" id="images" multiple>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

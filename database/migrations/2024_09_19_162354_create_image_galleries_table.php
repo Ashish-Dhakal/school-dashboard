@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('galleries_id')->nullable();
             $table->foreign('galleries_id')->references('id')->on('galleries');
-            $table->string('status');
+            $table->string('image'); 
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

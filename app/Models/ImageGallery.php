@@ -12,6 +12,7 @@ class ImageGallery extends Model
     protected $fillable = [
         'galleries_id',
         'status',
+        'image', 
     ];
 
     // Defining the relationship with the Gallery
