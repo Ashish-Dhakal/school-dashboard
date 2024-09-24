@@ -4,18 +4,18 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Notice Create')
+@section('content_header_subtitle', 'Event Create')
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
 
 
-        <a href="{{ route('notice.index') }}" class="btn btn-primary"> Back</a>
+        <a href="{{ route('event.index') }}" class="btn btn-primary"> Back</a>
 
 
         <!-- Modal -->
-        <form action="{{ route('notice.store') }}" method="post" class="mb-4" enctype="multipart/form-data">
+        <form action="{{ route('event.store') }}" method="post" class="mb-4" enctype="multipart/form-data">
             @csrf
 
             <div class="row mt-3">
@@ -50,7 +50,7 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="pdf">Notice File (Image or PDF)</label>
+                        <label for="pdf">event File (Image or PDF)</label>
                         <input type="file" name="pdf" id="pdf" accept="image/*,application/pdf">
                     </div>
                 </div>
@@ -88,6 +88,7 @@
                     value="0" unchecked>
                 <label class="form-check-label" for="flexSwitchCheckChecked">Feature Notice</label>
             </div>
+
 
             <div class="">
                 <button type="submit" class="btn btn-primary">Add</button>

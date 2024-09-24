@@ -3,14 +3,14 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'notice')
+@section('content_header_title', 'Event')
 {{-- @section('content_header_subtitle', '') --}}
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
 
-        <a href="{{ route('notice.create') }}" class="btn btn-primary"> Add Content</a>
+        <a href="{{ route('event.create') }}" class="btn btn-primary"> Add Content</a>
         <!-- Bootstrap Table -->
         <table class="table table-striped table-bordered mt-4">
             <thead class="thead-dark">
@@ -22,32 +22,32 @@
                     <th scope="col">Date</th>
                     <th scope="col">Galleries</th>
                     <th scope="col">Post Types</th>
-                    <th scope="col">PDF</th>
+                    <th scope="col">PDF/Image</th>
                     <th scope="col">Featured Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($notices as $notice)
+                @foreach ($events as $event)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $notice->title ?? '-' }}</td>
-                        <td>{{ $notice->slug ?? '-' }}</td>
-                        <td>{{ $notice->description ?? '-' }}</td>
-                        <td>{{ $notice->date ?? '-' }}</td>
-                        <td>{{ $notice->gallery->gallery_name ?? '-' }}</td>
-                        <td>{{ $notice->postType->name ?? '-' }}</td>
+                        <td>{{ $event->title ?? '-' }}</td>
+                        <td>{{ $event->slug ?? '-' }}</td>
+                        <td>{{ $event->description ?? '-' }}</td>
+                        <td>{{ $event->date ?? '-' }}</td>
+                        <td>{{ $event->gallery->gallery_name ?? '-' }}</td>
+                        <td>{{ $event->postType->name ?? '-' }}</td>
 
                         <td>
-                            @if (pathinfo($notice->pdf, PATHINFO_EXTENSION) == 'pdf')
-                                <a href="{{ asset('images/' . $notice->pdf) }}" target="_blank" class=" text-black">View
+                            @if (pathinfo($event->pdf, PATHINFO_EXTENSION) == 'pdf')
+                                <a href="{{ asset('images/' . $event->pdf) }}" target="_blank" class=" text-black">View
                                     PDF</a>
                             @else
-                                <img src="{{ asset('images/' . $notice->pdf) }}" alt="" style="max-width: 100px;">
+                                <img src="{{ asset('images/' . $event->pdf) }}" alt="" style="max-width: 100px;">
                             @endif
                         </td>
                         <td>
-                            @if ($notice->is_featureNotice === 1)
+                            @if ($event->is_featureNotice === 1)
                                 <span class="badge badge-success">Yes</span>
                             @else
                                 <span class="badge badge-danger">No</span>
@@ -55,8 +55,8 @@
                         </td>
                         <td>
                             <div class="d-flex">
-                                <a href="{{ route('notice.edit', $notice->slug) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('notice.destroy', $notice->slug) }}" method="POST"
+                                <a href="{{ route('event.edit', $event->slug) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('event.destroy', $event->slug) }}" method="POST"
                                     style="display: inline-block">
                                     @csrf
                                     @method('DELETE')

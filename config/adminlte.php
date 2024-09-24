@@ -345,6 +345,11 @@ return [
             'text' => 'Notice',
             'url' => 'notice',
             'icon' => 'fas fa-book',
+        ], 
+        [
+            'text' => 'Event',
+            'url' => 'event',
+            'icon' => 'fas fa-book',
         ],
      
      

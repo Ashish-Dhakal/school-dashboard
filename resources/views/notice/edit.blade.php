@@ -22,8 +22,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title"
-                            value="{{ $notice->title, old('title') }}" name="title" placeholder="Enter title">
+                        <input type="text" class="form-control" id="title" value="{{ $notice->title, old('title') }}"
+                            name="title" placeholder="Enter title">
                     </div>
                 </div>
 
@@ -32,8 +32,8 @@
                     <div class="form-group">
                         <label for="date">Date</label>
                         <input type="date" class="form-control" id="date" name="date"
-                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" onfocus="this.showPicker()">
-
+                            value="{{ old('date', $notice->date) }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                            onfocus="this.showPicker()">
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{$notice->description , old('description') }}</textarea>
+                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{ $notice->description, old('description') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -52,14 +52,16 @@
                     <div class="form-group">
                         <label for="pdf">Notice File (Image or PDF)</label>
                         <td>
-                            @if(pathinfo($notice->pdf, PATHINFO_EXTENSION) == 'pdf')
-                                <iframe src="{{ asset('images/' . $notice->pdf) }}" style="width: 100px; height: 100px;" frameborder="0"></iframe>
+                            @if (pathinfo($notice->pdf, PATHINFO_EXTENSION) == 'pdf')
+                                <iframe src="{{ asset('images/' . $notice->pdf) }}" style="width: 100px; height: 100px;"
+                                    frameborder="0"></iframe>
                             @else
                                 <img src="{{ asset('images/' . $notice->pdf) }}" alt="" style="max-width: 100px;">
                             @endif
                         </td>
                         <br>
-                        <input type="file" name="pdf" id="pdf" accept="image/*,application/pdf" placeholder="choose new one to upload new PDF">
+                        <input type="file" name="pdf" id="pdf" accept="image/*,application/pdf"
+                            placeholder="choose new one to upload new PDF">
 
                     </div>
                 </div>
@@ -92,8 +94,11 @@
                 </div>
             </div>
 
-            <div class="row mt-3"></div>
-
+            <div class="form-check form-switch my-3">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="is_featureNotice"
+                    value="1" {{ $notice->is_featureNotice ? 'checked' : '' }}>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Feature Notice</label>
+            </div>
 
             <div class="">
                 <button type="submit" class="btn btn-primary">Add</button>
@@ -110,11 +115,5 @@
 
 {{-- Push extra JS --}}
 @push('js')
-    {{-- <script>
-        ClassicEditor
-            .create(document.querySelector('#description'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
+  
 @endpush

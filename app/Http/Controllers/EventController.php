@@ -6,20 +6,20 @@ use App\Models\Content;
 use App\Models\Gallery;
 use App\Models\PostType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-class NoticeController extends Controller
+class EventController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['notices'] = Content::whereHas('postType', function ($query) {
-            $query->where('slug', 'notice');
+        $data['events'] = Content::whereHas('postType', function ($query) {
+            $query->where('slug', 'event');
         })->get();
 
-        return view('notice.index', $data);
+        return view('event.index', $data);
     }
 
     /**
@@ -28,9 +28,9 @@ class NoticeController extends Controller
     public function create()
     {
         // retrive all the posttype name
-        $data['posttype'] = PostType::where('name', 'Notice')->get();
+        $data['posttype'] = PostType::where('name', 'Event')->get();
         $data['galleries'] = Gallery::all();
-        return view('notice.create', $data);
+        return view('event.create', $data);
     }
 
     /**
@@ -48,7 +48,6 @@ class NoticeController extends Controller
             'pdf' => 'required|mimes:jpg,jpeg,png,gif,bmp,pdf',
             'date' => 'required',
             'is_featureNotice' => 'nullable|boolean'
-
         ]);
         // Create initial slug
         $slug = strtolower(str_replace(' ', '-', $validatedData['title']));
@@ -83,7 +82,7 @@ class NoticeController extends Controller
         }
         $content->save();
 
-        return redirect()->route('notice.index')->with('success', 'Notice created successfully');
+        return redirect()->route('event.index')->with('success', 'Event created successfully');
     }
 
 
@@ -102,11 +101,11 @@ class NoticeController extends Controller
      */
     public function edit($slug)
     {
-        $data['posttype'] = PostType::where('name', 'Notice')->get();
+        $data['posttype'] = PostType::where('name', 'Event')->get();
 
         $data['galleries'] = Gallery::all();
-        $data['notice'] = Content::where('slug', $slug)->firstOrFail();
-        return view('notice.edit', $data);
+        $data['event'] = Content::where('slug', $slug)->firstOrFail();
+        return view('event.edit', $data);
     }
 
     /**
@@ -128,7 +127,6 @@ class NoticeController extends Controller
             'pdf' => 'nullable|mimes:pdf,jpg,jpeg,png,gif,bmp', // Removed file size limit
             'date' => 'nullable|date',
             'is_featureNotice' => 'nullable|boolean'
-
         ]);
 
         // Update the content fields
@@ -139,6 +137,8 @@ class NoticeController extends Controller
         $content->date = $validatedData['date'] ?? $content->date;
         $content->is_featureNotice = $request->has('is_featureNotice') ? 1 : 0;
 
+
+        
 
         // Handle the PDF update
         if ($request->hasFile('pdf')) {
@@ -171,7 +171,7 @@ class NoticeController extends Controller
         // Save the content
         try {
             $content->save();
-            return redirect()->route('notice.index')->with('success', 'Notice updated successfully');
+            return redirect()->route('event.index')->with('success', 'Notice updated successfully');
         } catch (\Exception $e) {
             \Log::error('Error saving notice:', ['error' => $e->getMessage()]);
             return back()->withErrors(['error' => 'Failed to update notice: ' . $e->getMessage()]);
