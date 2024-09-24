@@ -36,19 +36,16 @@ class PostTypeController extends BaseController
             'name' => 'required|max:20|min:3'
         ]);
 
-        // Create initial slug
         $slug = strtolower(str_replace(' ', '-', $validation['name']));
 
-        // Check for uniqueness
         $originalSlug = $slug;
         $count = 1;
 
         while (PostType::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $count; // Append a number to the slug
+            $slug = $originalSlug . '-' . $count; 
             $count++;
         }
 
-        // Create the post type
         PostType::create([
             'name' => $validation['name'],
             'slug' => $slug,
@@ -107,19 +104,15 @@ class PostTypeController extends BaseController
 
     public function updatePinStatus(Request $request)
     {
-        // dd('asdfs');
-        // Validate the request
         $request->validate([
             'id' => 'required|integer',
             'pin_to_sidebar' => 'required|boolean',
         ]);
 
-        // Find the post type by ID and update the pin status
         $postType = PostType::findOrFail($request->id);
         $postType->is_pinned = $request->pin_to_sidebar;
         $postType->save();
 
-        // Return a success response
         return response()->json(['message' => 'Pin status updated successfully.']);
     }
 }

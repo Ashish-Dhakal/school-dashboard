@@ -75,11 +75,9 @@
                                 <input type="text" class="form-control" name="name" id="name"
                                     placeholder="Post Type Name">
 
-                                {{-- display the error validation message --}}
 
 
                             </div>
-                            <!-- Add any other form fields here -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

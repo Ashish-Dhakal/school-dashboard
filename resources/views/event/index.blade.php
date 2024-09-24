@@ -86,7 +86,5 @@
 
 {{-- Push extra JS --}}
 @push('js')
-    <script>
-        console.log("Hi, I'm using the Laravel-AdminLTE package!");
-    </script>
+  
 @endpush

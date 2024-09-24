@@ -102,17 +102,15 @@ class AboutController extends Controller
      */
     public function update(Request $request, $slug)
     {
-         // Find the content by its slug
          $content = Content::where('slug', $slug)->firstOrFail();
 
-         // Validate the request data, making 'feature_image' nullable
          $validatedData = $request->validate([
              'title' => 'required|max:50',
              'description' => 'required',
              'sub_desc' => 'required',
              'galleries_id' => '',
              'post_types_id' => 'required',
-             'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp', // Nullable here
+             'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp', 
          ]);
  
          // Update the content fields
@@ -124,6 +122,7 @@ class AboutController extends Controller
  
          // Handle the feature image update only if a new file is uploaded
          if ($request->hasFile('feature_image')) {
+
              // Get the new image file
              $image = $request->file('feature_image');
              $image_name = time() . '.' . $image->getClientOriginalExtension();
@@ -138,6 +137,7 @@ class AboutController extends Controller
  
              // Update the feature_image field with the new image name
              $content->feature_image = $image_name;
+             
          } else {
              // Retain the current image if no new image is uploaded (use hidden field)
              $content->feature_image = $request->input('current_image');

@@ -16,7 +16,6 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        // select the only gallery_name only from gallery database
         $data['galleries'] = Gallery::paginate(4);
         return view('gallery.index', $data);
     }
@@ -34,22 +33,19 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the input
         $request->validate([
             'gallery_name' => 'required|string|max:255',
-            'images.*' => 'image|mimes:jpg,jpeg,png,gif,bmp|max:2048', // Validate each image
+            'images.*' => 'image|mimes:jpg,jpeg,png,gif,bmp|max:2048', 
         ]);
 
         // Start a transaction
         DB::beginTransaction();
 
         try {
-            // Create the gallery first
             $gallery = Gallery::create([
                 'gallery_name' => $request->gallery_name,
             ]);
 
-            // Check if images are uploaded
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     // Store each image in the public directory
@@ -103,7 +99,7 @@ class GalleryController extends Controller
 
     public function edit($id)
     {
-        $gallery = Gallery::findOrFail($id);  // Ensure this is fetching the correct gallery record
+        $gallery = Gallery::findOrFail($id);  
         return view('gallery.edit', compact('gallery'));
     }
 
@@ -128,7 +124,6 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery, $id)
     {
-        // delete the gallery row havig  the $id
         Gallery::destroy($id);
         return redirect()->back()->with('success', 'Gallery deleted successfully!');
     }

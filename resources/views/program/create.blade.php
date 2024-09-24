@@ -73,9 +73,7 @@
                         <select class="form-control" id="post_types_id" name="post_types_id">
                             <option value="{{ $posttype->pluck('id')->implode(',') }}">
                                 {{ $posttype->pluck('slug')->implode(' ') }}
-                            </option>                            {{--    @foreach ($posttypes as $posttype)
-                            <option value="{{ $posttype->id }}">{{ $posttype->name }}</option>
-                            @endforeach --}}
+                            </option>                      
                         </select>
                     </div>
                 </div>

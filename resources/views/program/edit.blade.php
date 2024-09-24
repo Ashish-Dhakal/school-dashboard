@@ -29,10 +29,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    {{-- <div class="form-group">
-                        <label for="feature_image">Feature Image</label>
-                        <input type="file" class="form-control" id="feature_image" name="feature_image" value="{{$program->feature_image}}">
-                    </div> --}}
+                   
                     <div class="form-group">
                         <label for="feature_image">Feature Image</label>
                         <!-- Check if the image exists and display it -->
@@ -95,9 +92,7 @@
                         <select class="form-control" id="post_types_id" name="post_types_id">
                             <option value="{{ $posttype->pluck('id')->implode(',') }}">
                                 {{ $posttype->pluck('slug')->implode(' ') }}
-                            </option>                            {{--    @foreach ($posttypes as $posttype)
-                            <option value="{{ $posttype->id }}">{{ $posttype->name }}</option>
-                            @endforeach --}}
+                            </option>
                         </select>
                     </div>
                 </div>

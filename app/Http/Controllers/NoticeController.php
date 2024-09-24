@@ -27,7 +27,6 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        // retrive all the posttype name
         $data['posttype'] = PostType::where('name', 'Notice')->get();
         $data['galleries'] = Gallery::all();
         return view('notice.create', $data);
@@ -38,8 +37,6 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $validatedData = $request->validate([
             'title' => 'required|max:50',
             'description' => 'required',
@@ -50,15 +47,13 @@ class NoticeController extends Controller
             'is_featureNotice' => 'nullable|boolean'
 
         ]);
-        // Create initial slug
         $slug = strtolower(str_replace(' ', '-', $validatedData['title']));
 
-        // Check for uniqueness
         $originalSlug = $slug;
         $count = 1;
 
         while (PostType::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $count; // Append a number to the slug
+            $slug = $originalSlug . '-' . $count; 
             $count++;
         }
         // save the data
@@ -103,7 +98,6 @@ class NoticeController extends Controller
     public function edit($slug)
     {
         $data['posttype'] = PostType::where('name', 'Notice')->get();
-
         $data['galleries'] = Gallery::all();
         $data['notice'] = Content::where('slug', $slug)->firstOrFail();
         return view('notice.edit', $data);
@@ -125,7 +119,7 @@ class NoticeController extends Controller
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'pdf' => 'nullable|mimes:pdf,jpg,jpeg,png,gif,bmp', // Removed file size limit
+            'pdf' => 'nullable|mimes:pdf,jpg,jpeg,png,gif,bmp', 
             'date' => 'nullable|date',
             'is_featureNotice' => 'nullable|boolean'
 
@@ -145,23 +139,18 @@ class NoticeController extends Controller
             $pdf = $request->file('pdf');
 
             if ($pdf->isValid()) {
-                // Generate a new unique name for the file
                 $pdf_name = time() . '.' . $pdf->getClientOriginalExtension();
 
-                // Move the file to public/images
                 $uploadSuccess = $pdf->move(public_path('images'), $pdf_name);
 
-                // If move() fails, return an error
                 if (!$uploadSuccess) {
                     return back()->withErrors(['pdf' => 'Failed to upload the PDF file.']);
                 }
 
-                // Optionally delete the old file if it exists
                 if ($content->pdf && file_exists(public_path('images/' . $content->pdf))) {
                     unlink(public_path('images/' . $content->pdf));
                 }
 
-                // Update the content's PDF field
                 $content->pdf = $pdf_name;
             } else {
                 return back()->withErrors(['pdf' => 'Uploaded file is not valid.']);

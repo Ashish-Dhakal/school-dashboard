@@ -27,7 +27,6 @@ class EventController extends Controller
      */
     public function create()
     {
-        // retrive all the posttype name
         $data['posttype'] = PostType::where('name', 'Event')->get();
         $data['galleries'] = Gallery::all();
         return view('event.create', $data);
@@ -49,17 +48,16 @@ class EventController extends Controller
             'date' => 'required',
             'is_featureNotice' => 'nullable|boolean'
         ]);
-        // Create initial slug
         $slug = strtolower(str_replace(' ', '-', $validatedData['title']));
 
-        // Check for uniqueness
         $originalSlug = $slug;
         $count = 1;
 
         while (PostType::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $count; // Append a number to the slug
+            $slug = $originalSlug . '-' . $count; 
             $count++;
         }
+
         // save the data
         $content = new Content();
         $content->title = $validatedData['title'];
@@ -77,7 +75,6 @@ class EventController extends Controller
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $image_name);
 
-            // Save only the image file name in the database
             $content->pdf = $image_name;
         }
         $content->save();
@@ -115,16 +112,14 @@ class EventController extends Controller
 
     public function update(Request $request, $slug)
     {
-        // Find the content by its slug
         $content = Content::where('slug', $slug)->firstOrFail();
 
-        // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|max:50',
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'pdf' => 'nullable|mimes:pdf,jpg,jpeg,png,gif,bmp', // Removed file size limit
+            'pdf' => 'nullable|mimes:pdf,jpg,jpeg,png,gif,bmp', 
             'date' => 'nullable|date',
             'is_featureNotice' => 'nullable|boolean'
         ]);
@@ -145,7 +140,6 @@ class EventController extends Controller
             $pdf = $request->file('pdf');
 
             if ($pdf->isValid()) {
-                // Generate a new unique name for the file
                 $pdf_name = time() . '.' . $pdf->getClientOriginalExtension();
 
                 // Move the file to public/images

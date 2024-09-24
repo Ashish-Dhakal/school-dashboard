@@ -10,7 +10,7 @@
 @section('content_body')
     <div class="container">
 
-        <a href="{{ route('notice.create') }}" class="btn btn-primary"> Add Content</a>
+        <a href="{{ route('notice.create') }}" class="btn btn-primary"> Add Notice</a>
         <!-- Bootstrap Table -->
         <table class="table table-striped table-bordered mt-4">
             <thead class="thead-dark">
@@ -86,7 +86,5 @@
 
 {{-- Push extra JS --}}
 @push('js')
-    <script>
-        console.log("Hi, I'm using the Laravel-AdminLTE package!");
-    </script>
+    
 @endpush

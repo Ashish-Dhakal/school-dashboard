@@ -14,7 +14,6 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        // $data['programs'] = Content::where('post_types_id', 6)->get();
         $data['programs'] = Content::whereHas('postType', function ($query) {
             $query->where('slug', 'program');
         })->get();
@@ -27,7 +26,6 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        // retrive all the posttype name
         $data['posttype'] = PostType::where('name', 'Program')->get();
         $data['galleries'] = Gallery::all();
         return view('program.create', $data);
@@ -47,7 +45,6 @@ class ProgramController extends Controller
             'post_types_id' => 'required',
             'feature_image' => 'required|mimes:jpg,jpeg,png,gif,bmp',
         ]);
-        // Create initial slug
         $slug = strtolower(str_replace(' ', '-', $validatedData['title']));
 
         // Check for uniqueness
@@ -109,17 +106,15 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        // Find the content by its slug
         $content = Content::where('slug', $slug)->firstOrFail();
 
-        // Validate the request data, making 'feature_image' nullable
         $validatedData = $request->validate([
             'title' => 'required|max:50',
             'description' => 'required',
             'sub_desc' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp', // Nullable here
+            'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp',
         ]);
 
         // Update the content fields
@@ -129,28 +124,22 @@ class ProgramController extends Controller
         $content->galleries_id = $validatedData['galleries_id'];
         $content->post_types_id = $validatedData['post_types_id'];
 
-        // Handle the feature image update only if a new file is uploaded
         if ($request->hasFile('feature_image')) {
             // Get the new image file
             $image = $request->file('feature_image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
 
-            // Move the new image to the public path
             $image->move(public_path('images'), $image_name);
 
-            // Optionally delete the old image file if it exists
             if ($content->feature_image && file_exists(public_path('images/program/' . $content->feature_image))) {
                 unlink(public_path('images' . $content->feature_image));
             }
 
-            // Update the feature_image field with the new image name
             $content->feature_image = $image_name;
         } else {
-            // Retain the current image if no new image is uploaded (use hidden field)
             $content->feature_image = $request->input('current_image');
         }
 
-        // Save the updated content
         $content->save();
 
         return redirect()->route('program.index')->with('success', 'Program updated successfully');
