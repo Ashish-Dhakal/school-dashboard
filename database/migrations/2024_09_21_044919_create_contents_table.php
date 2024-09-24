@@ -23,6 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('post_types_id')->nullable();
             $table->foreign('post_types_id')->references('id')->on('post_types');
             $table->boolean('is_featureNotice')->default(false);
+            $table->string('pdf')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

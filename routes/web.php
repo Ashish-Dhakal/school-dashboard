@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProgramController;
@@ -65,5 +66,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{slug}', [AboutController::class, 'edit'])->name('edit');
         Route::post('/update/{slug}', [AboutController::class, 'update'])->name('update');
         Route::delete('/destroy/{slug}', [AboutController::class, 'destroy'])->name('destroy');
+    });
+
+       // route for the Notice
+       Route::prefix('/notice')->name('notice.')->group(function () {
+        Route::get('/', [NoticeController::class, 'index'])->name('index');
+        Route::get('/create', [NoticeController::class, 'create'])->name('create');
+        Route::post('/store', [NoticeController::class, 'store'])->name('store');
+        Route::get('/edit/{slug}', [NoticeController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [NoticeController::class, 'update'])->name('update');
+        Route::delete('/destroy/{slug}', [NoticeController::class, 'destroy'])->name('destroy');
     });
 });

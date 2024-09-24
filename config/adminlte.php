@@ -340,6 +340,12 @@ return [
             'url' => 'about',
             'icon' => 'fas fa-book',
         ],
+
+        [
+            'text' => 'Notice',
+            'url' => 'notice',
+            'icon' => 'fas fa-book',
+        ],
      
      
         ['header' => 'account_settings'],
