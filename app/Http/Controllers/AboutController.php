@@ -26,7 +26,6 @@ class AboutController extends Controller
      */
     public function create()
     {
-         // retrive all the posttype name
          $data['posttype'] = PostType::where('name', 'About us')->get();
          $data['galleries'] = Gallery::all();
          return view('about.create', $data);
@@ -46,18 +45,17 @@ class AboutController extends Controller
             'post_types_id' => 'required',
             'feature_image' => 'required|mimes:jpg,jpeg,png,gif,bmp',
         ]);
-        // Create initial slug
+
         $slug = strtolower(str_replace(' ', '-', $validatedData['title']));
 
-        // Check for uniqueness
         $originalSlug = $slug;
         $count = 1;
 
         while (PostType::where('slug', $slug)->exists()) {
-            $slug = $originalSlug . '-' . $count; // Append a number to the slug
+            $slug = $originalSlug . '-' . $count; 
             $count++;
         }
-        // save the data
+
         $content = new Content();
         $content->title = $validatedData['title'];
         $content->slug = $slug;
@@ -94,7 +92,6 @@ class AboutController extends Controller
     public function edit($slug)
     {
         $data['posttype'] = PostType::where('name', 'About us')->get();
-
         $data['galleries'] = Gallery::all();
         $data['about'] = Content::where('slug', $slug)->firstOrFail();
         return view('about.edit', $data);

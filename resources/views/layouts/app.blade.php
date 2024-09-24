@@ -36,12 +36,14 @@
 
 @section('footer')
     <div class="float-right">
-        Version: {{ config('app.version', '1.0.0') }}
+        Developed By: <a href="https://xerosoft.com.np" class=" text-decoration-none text-black-50">
+            {{ config('app.company_name','Xero Soft Pvt. Ltd.') }}
+        </a>
     </div>
 
     <strong>
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'My company') }}
+        <a href="#" class=" text-decoration-none text-black-50" target="_blank">
+            {{ config('app.company_name', 'XYX school') }}
         </a>
     </strong>
 @stop
