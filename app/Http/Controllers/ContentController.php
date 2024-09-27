@@ -37,9 +37,11 @@ class ContentController extends Controller
      */
     public function show($post_type, $post_content)
     {
+        // dd($post_type,$post_content);
         $contetType = PostType::where('slug', $post_type)->firstOrFail();
         $content = Content::where('slug', $post_content)->firstOrFail();
         // dd($content);
+        // dd($contetType->name);
     
         return view('frontend.content', compact('contetType', 'content'));
     }

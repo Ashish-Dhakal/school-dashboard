@@ -126,8 +126,14 @@
                                 <img src="{{ asset('images/' . $program->feature_image) }}" alt="Feature Image">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"><a href="">{{ $program->title }}</a></h5>
+                                <a href="">
+
+                                    
+                                <h5 class="card-title"><a href="{{ route('content', ['post_type' => $program->postType->slug,'post_content'=>$program->slug])}}">{{ $program->title }}</a></h5>
                                 <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
+
+                            </a>
+
                             </div>
                         </div>
                     </div>
@@ -176,7 +182,7 @@
                     </div>
                     @foreach ($events as $event)
                         <div class="d-flex flex-wrap">
-                            <a class="event-item d-inline-block" href="{{asset('images/' . $event->pdf) }}"
+                            <a class="event-item d-inline-block" href="{{ route('content', ['post_type' => $event->postType->slug,'post_content'=>$event->slug])}}"
                                 target="_blank">
                                 <div class=" d-flex m-1">
                                     <div class="event-meta-data m-1">
@@ -210,7 +216,7 @@
                     </div>
                     @foreach ($notices as $notice)
                         <div class="d-flex flex-wrap">
-                            <a class="event-item d-inline-block" href="{{ asset('images/' . $notice->pdf) }}"
+                            <a class="event-item d-inline-block" href="{{ route('content', ['post_type' => $notice->postType->slug,'post_content'=>$notice->slug])}}"
                                 target="_blank">
                                 <div class=" d-flex m-1">
                                     <div class="event-meta-data m-1">
@@ -225,8 +231,9 @@
                                             <i class="bi bi-calendar-event"></i>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="event-content-text">
+                                       
                                         <p>
                                             {{ $notice->title }}
                                         </p>

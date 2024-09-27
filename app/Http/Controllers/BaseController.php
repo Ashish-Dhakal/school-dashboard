@@ -5,63 +5,42 @@ namespace App\Http\Controllers;
 use App\Models\PostType;
 use App\Models\Content;
 use Illuminate\Http\Request;
-
 class BaseController extends Controller
 {
-    // for program to fetch the data
-    public function fetch_all_posttype()
+    // Generic method to fetch content by post type slug
+    public function fetch_all_by_posttype_slug($slug)
     {
-        $data['postTypes'] = PostType::paginate(10);
-        return $data;
+        return Content::with('postType') // Eager load the PostType relationship
+            ->whereHas('postType', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })->get();
     }
 
+    // Fetch all programs
     public function fetch_all_program()
     {
-
-        // $data['programs'] = Content::whereHas('postType', function ($query) {
-        //     $query->where('slug', 'program');
-        // })->get();
-
-        $data['programs'] = Content::with('postType') // Eager load the PostType relationship
-        ->whereHas('postType', function ($query) {
-            $query->where('slug', 'program');
-        })->get();
-    
+        $data['programs'] = $this->fetch_all_by_posttype_slug('program');
         return $data;
     }
 
-
+    // Fetch all notices
     public function fetch_all_notice()
     {
-        // $data['notices'] = Content::whereHas('postType', function ($query) {
-        //     $query->where('slug', 'notice');
-        // })->get();
-        $data['notices'] = Content::with('postType') // Eager load the PostType relationship
-        ->whereHas('postType', function ($query) {
-            $query->where('slug', 'notice');
-        })->get();
+        $data['notices'] = $this->fetch_all_by_posttype_slug('notice');
         return $data;
     }
 
+    // Fetch all events
     public function fetch_all_event()
     {
-        // $data['events'] = Content::whereHas('postType', function ($query) {
-        //     $query->where('slug', 'event');
-        // })->get();
-
-
-        $data['events'] = Content::with('postType') // Eager load the PostType relationship
-        ->whereHas('postType', function ($query) {
-            $query->where('slug', 'event');
-        })->get();
+        $data['events'] = $this->fetch_all_by_posttype_slug('event');
         return $data;
     }
 
+    // Fetch about-us content
     public function fetch_all_about()
     {
-        $data['abouts'] = Content::whereHas('postType', function ($query) {
-            $query->where('slug', 'about-us');
-        })->get();
+        $data['abouts'] = $this->fetch_all_by_posttype_slug('about-us');
         return $data;
     }
 }

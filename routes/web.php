@@ -18,9 +18,7 @@ use App\Http\Controllers\PostTypeController;
 
 Auth::routes();
 
-// route form the front-end
-Route::get('/', [FrontController::class, 'index'])->name('front.index');
-Route::get('/about', [FrontController::class, 'about'])->name('front.about');
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -94,3 +92,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{slug}', [EventController::class, 'destroy'])->name('destroy');
     });
 });
+
+// route form the front-end
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/about', [FrontController::class, 'about'])->name('front.about');
+Route::get('{post_type}/{post_content}' , [ContentController::class , 'show'])->name('content');

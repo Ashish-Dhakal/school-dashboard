@@ -15,11 +15,11 @@ class PostTypeController extends BaseController
      */
     public function index()
     {
-        $data = $this->fetch_all_postType();
+        $data['postTypes'] = PostType::paginate(4);
         return view('post-type.index', $data);
     }
 
-    /**
+    /**s
      * Show the form for creating a new resource.
      */
     public function create()
