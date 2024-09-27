@@ -1,3 +1,4 @@
+
 @extends('frontend.layout') <!-- Extends the layout -->
 
 @section('title', 'Home') <!-- Sets the page title -->
@@ -124,20 +125,10 @@
 
                                 <img src="{{ asset('images/' . $program->feature_image) }}" alt="Feature Image">
                             </div>
-                       
-                            
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                      
-                                        {{-- <a href="{{ route('content', ['post_type' => $program->slug, 'post_content' => $program->slug]) }}"> --}}
-                                            <a href="{{ route('content', ['post_type' => $program->postType->slug, 'post_content' => $program->slug]) }}">
-                                                {{ $program->title }}
-                                            </a>
-                                    </h5>
-                                    <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
-                                </div>
-                            
-
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="">{{ $program->title }}</a></h5>
+                                <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -177,16 +168,15 @@
     <section id="event" class="events section">
         <div class="container content">
             <div class="row gy-4">
-                <div style="    border-left: 1px solid green;" class="col-lg-6 order-1 order-lg-2  " data-aos="fade-up"
-                    data-aos-delay="100">
+                <div style="    border-left: 1px solid green;" class="col-lg-6 order-1 order-lg-2  "
+                    data-aos="fade-up" data-aos-delay="100">
                     <div class="d-flex justify-content-between section-title">
                         <h2 class="d-inline-block">Events</h2>
                         <a href="#">View All Events</a>
                     </div>
-                    
                     @foreach ($events as $event)
                         <div class="d-flex flex-wrap">
-                            <a class="event-item d-inline-block" href="{{ route('content', ['post_type' => $event->postType->slug, 'post_content' => $event->slug]) }}"
+                            <a class="event-item d-inline-block" href="{{asset('images/' . $event->pdf) }}"
                                 target="_blank">
                                 <div class=" d-flex m-1">
                                     <div class="event-meta-data m-1">
@@ -220,9 +210,8 @@
                     </div>
                     @foreach ($notices as $notice)
                         <div class="d-flex flex-wrap">
-                            <a class="event-item d-inline-block" href="{{ route('content', ['post_type' => $notice->postType->slug, 'post_content' => $notice->slug]) }}"
+                            <a class="event-item d-inline-block" href="{{ asset('images/' . $notice->pdf) }}"
                                 target="_blank">
-                             
                                 <div class=" d-flex m-1">
                                     <div class="event-meta-data m-1">
                                         <div class="event-meta-date mb-1">
@@ -263,7 +252,8 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="card-item">
                         <img src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
                         <div class="card-content">
@@ -283,7 +273,8 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="card-item">
                         <img src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
                         <div class="card-content">
@@ -303,7 +294,8 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="card-item">
                         <img src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
                         <div class="card-content">
@@ -322,7 +314,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="card-item">
                         <img src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
                         <div class="card-content">
@@ -358,49 +351,64 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
                         <img data-imagebox="g1"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"
@@ -408,9 +416,11 @@
 
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                    data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid"
+                            alt="..." />
 
                     </div>
                 </div>

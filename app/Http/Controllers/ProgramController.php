@@ -163,9 +163,4 @@ class ProgramController extends Controller
 
         return redirect()->route('program.index')->with('error' , 'Content not found.');
     }
-
-
-    public function createprogram(){
-        dd('ssdds');
-    }
 }

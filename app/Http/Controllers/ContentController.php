@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\PostType;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -34,9 +35,13 @@ class ContentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Content $content)
+    public function show($post_type, $post_content)
     {
-        //
+        $contetType = PostType::where('slug', $post_type)->firstOrFail();
+        $content = Content::where('slug', $post_content)->firstOrFail();
+        // dd($content);
+    
+        return view('frontend.content', compact('contetType', 'content'));
     }
 
     /**

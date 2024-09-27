@@ -24,7 +24,13 @@
 
         <div class="container">
 
-            <div class="row gy-4 flex-row-reverse">
+            <div class="row gy-4">
+
+                <div class="col-lg-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+                    <img width="100%"
+                        src="https://i0.pickpik.com/photos/661/876/856/entrepreneur-computer-man-office-preview.jpg"
+                        class="img-fluid" alt="">
+                </div>
 
                 <div class="col-lg-7 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
                     <h3>Message From Principle</h3>
@@ -39,12 +45,6 @@
                                 voluptate velit.</span></li>
                     </ul>
 
-                </div>
-
-                <div class="col-lg-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-                    <img width="100%"
-                        src="https://i0.pickpik.com/photos/661/876/856/entrepreneur-computer-man-office-preview.jpg"
-                        class="img-fluid" alt="">
                 </div>
 
             </div>
@@ -90,7 +90,6 @@
     </section>
     <!-- /About Section -->
 
-{{-- {{$about}} --}}
     <section id="content" class="content container">
         <h1>Lorem ipsum dolor sit amet.</h1>
         <p>Bachelors of Software Engineering program is a 4-year (8 semesters) 133 credit undergraduate engineering program.

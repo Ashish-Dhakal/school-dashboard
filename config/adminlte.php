@@ -317,12 +317,12 @@ return [
         ],
         [
             'text' => ' Post Type',
-            'url' => 'dash/post-type',
+            'url' => 'back-post-type',
             'icon' => 'fas fa-paste',
         ],
         [
             'text' => ' Gallery',
-            'url' => 'dash/gallery',
+            'url' => 'back-gallery',
             'icon' => 'far fa-fw fa-image',
         ],
       
@@ -330,7 +330,7 @@ return [
 
         [
             'text' => ' Message from',
-            'url' => 'dash/message',
+            'url' => 'back-message',
             'icon' => 'far fa-fw fa-message',
         ],
        
