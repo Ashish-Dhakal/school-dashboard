@@ -7,15 +7,20 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\PostTypeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Auth::routes();
+
+// for displaying the data dynamically in index page
+
+Route::get('/',[FrontController::class , 'index'])->name('front.index');
 
 Route::middleware(['auth'])->group(function () {
 
