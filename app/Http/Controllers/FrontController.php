@@ -18,6 +18,8 @@ class FrontController extends BaseController
     }
 
     public function about(){
-        return view('frontend.about');
+        $about = $this->fetch_all_event();
+        $data = array_merge($about); 
+        return view('frontend.about',$data);
     }
 }
