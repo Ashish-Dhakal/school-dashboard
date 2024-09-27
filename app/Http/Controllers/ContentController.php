@@ -44,6 +44,8 @@ class ContentController extends Controller
         // dd($contetType->name);
     
         return view('frontend.content', compact('contetType', 'content'));
+
+        
     }
 
     /**
