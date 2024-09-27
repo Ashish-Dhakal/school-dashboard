@@ -317,16 +317,22 @@ return [
         ],
         [
             'text' => ' Post Type',
-            'url' => 'post-type',
+            'url' => 'back-post-type',
             'icon' => 'fas fa-paste',
         ],
         [
             'text' => ' Gallery',
-            'url' => 'gallery',
+            'url' => 'back-gallery',
             'icon' => 'far fa-fw fa-image',
         ],
       
         ['header' => 'CONTENT FORM'],
+
+        [
+            'text' => ' Message from',
+            'url' => 'back-message',
+            'icon' => 'far fa-fw fa-message',
+        ],
        
     ],
 

@@ -25,6 +25,8 @@ return new class extends Migration
             $table->boolean('is_featureNotice')->default(false);
             $table->string('pdf')->nullable();
             $table->date('date')->nullable();
+            // message from it can be pricipal ,director, chhaipersion, almuni_student,  user enum
+            $table->enum('message_from', ['principal', 'director', 'chhaipersion', 'alumni_student', 'user'])->nullable();
             $table->timestamps();
         });
     }

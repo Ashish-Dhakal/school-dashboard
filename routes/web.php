@@ -18,16 +18,16 @@ use App\Http\Controllers\PostTypeController;
 
 Auth::routes();
 
-// for displaying the data dynamically in index page
-
-Route::get('/',[FrontController::class , 'index'])->name('front.index');
+// route form the front-end
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/about', [FrontController::class, 'about'])->name('front.about');
 
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // route for the gallery
-    Route::prefix('/gallery')->name('gallery.')->group(function () {
+    Route::prefix('/back-gallery')->name('gallery.')->group(function () {
         Route::get('/', [GalleryController::class, 'index'])->name('index');
         Route::post('/store', [GalleryController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [GalleryController::class, 'edit'])->name('edit');
@@ -37,14 +37,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     // route for the content
-    Route::prefix('/content')->name('content.')->group(function () {
+    Route::prefix('/back-content')->name('content.')->group(function () {
         Route::get('/', [ContentController::class, 'index'])->name('index');
         Route::get('/create', [ContentController::class, 'create'])->name('create');
         Route::post('/store', [ContentController::class, 'store'])->name('store');
     });
 
     // route for the postType
-    Route::prefix('/post-type')->name('postType.')->group(function () {
+    Route::prefix('/back-post-type')->name('postType.')->group(function () {
         Route::get('/', [PostTypeController::class, 'index'])->name('index');
         Route::get('/create', [PostTypeController::class, 'create'])->name('create');
         Route::get('/edit/{slug}', [PostTypeController::class, 'edit'])->name('edit');
@@ -54,8 +54,8 @@ Route::middleware(['auth'])->group(function () {
         route::post('/updatePinStatus', [PostTypeController::class, 'updatePinStatus'])->name('updatePinStatus');
     });
 
-       // route for the program
-       Route::prefix('/program')->name('program.')->group(function () {
+    // route for the program
+    Route::prefix('/back-program')->name('program.')->group(function () {
         Route::get('/', [ProgramController::class, 'index'])->name('index');
         Route::get('/create', [ProgramController::class, 'create'])->name('create');
         Route::post('/store', [ProgramController::class, 'store'])->name('store');
@@ -64,8 +64,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{slug}', [ProgramController::class, 'destroy'])->name('destroy');
     });
 
-       // route for the about
-       Route::prefix('/about')->name('about.')->group(function () {
+    // route for the about
+    Route::prefix('/back-about')->name('about.')->group(function () {
         Route::get('/', [AboutController::class, 'index'])->name('index');
         Route::get('/create', [AboutController::class, 'create'])->name('create');
         Route::post('/store', [AboutController::class, 'store'])->name('store');
@@ -74,8 +74,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{slug}', [AboutController::class, 'destroy'])->name('destroy');
     });
 
-       // route for the Notice
-       Route::prefix('/notice')->name('notice.')->group(function () {
+    // route for the Notice
+    Route::prefix('back-notice')->name('notice.')->group(function () {
         Route::get('/', [NoticeController::class, 'index'])->name('index');
         Route::get('/create', [NoticeController::class, 'create'])->name('create');
         Route::post('/store', [NoticeController::class, 'store'])->name('store');
@@ -84,13 +84,13 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{slug}', [NoticeController::class, 'destroy'])->name('destroy');
     });
 
-           // route for the Event
-           Route::prefix('/event')->name('event.')->group(function () {
-            Route::get('/', [EventController::class, 'index'])->name('index');
-            Route::get('/create', [EventController::class, 'create'])->name('create');
-            Route::post('/store', [EventController::class, 'store'])->name('store');
-            Route::get('/edit/{slug}', [EventController::class, 'edit'])->name('edit');
-            Route::post('/update/{slug}', [EventController::class, 'update'])->name('update');
-            Route::delete('/destroy/{slug}', [EventController::class, 'destroy'])->name('destroy');
-        });
+    // route for the Event
+    Route::prefix('/back-event')->name('event.')->group(function () {
+        Route::get('/', [EventController::class, 'index'])->name('index');
+        Route::get('/create', [EventController::class, 'create'])->name('create');
+        Route::post('/store', [EventController::class, 'store'])->name('store');
+        Route::get('/edit/{slug}', [EventController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [EventController::class, 'update'])->name('update');
+        Route::delete('/destroy/{slug}', [EventController::class, 'destroy'])->name('destroy');
+    });
 });
