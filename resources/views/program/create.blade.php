@@ -53,6 +53,8 @@
                 </div>
             </div>
 
+            
+
             <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -66,7 +68,7 @@
                     </div>
                 </div>
 
-                
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="post_types_id">Post Types</label>

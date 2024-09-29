@@ -26,6 +26,8 @@
     <section id="content" class="content container">
         <h2 data-aos="fade-up" data-aos-delay="100">{{$content->title }}</h2>
 
+
+        
         {!! $content->description !!}
 
         <a href="apply.html" class="btn btn-primary">Apply Now</a>

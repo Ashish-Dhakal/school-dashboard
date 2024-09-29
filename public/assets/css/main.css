@@ -110,4 +110,67 @@ section,
 /*--------------------------------------------------------------
 # Start Css Here
 --------------------------------------------------------------*/
- 
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+/* Header Styles */
+table thead th {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Body Styles */
+table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1; /* Light gray on hover */
+}
+
+table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Alternating Row Colors */
+table tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9; /* Light gray for odd rows */
+}
+
+/* Border Styles */
+table {
+  border: 1px solid #dee2e6; /* Light gray border */
+  border-radius: 0.25rem;
+  overflow: hidden; /* Rounded corners */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+  }
+}
+
+/* Additional Styling for Buttons within Table */
+table .btn {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+/* Example for special columns */
+table .highlight {
+  background-color: #ffeeba; /* Yellow highlight for special columns */
+  font-weight: bold;
+}
