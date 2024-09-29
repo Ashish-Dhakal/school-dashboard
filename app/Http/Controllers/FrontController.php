@@ -24,4 +24,18 @@ class FrontController extends BaseController
     {
         return view('frontend.about');
     }
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+    public function notice()
+    {
+        $data = $this->fetch_all_notice();
+        return view('frontend.notice',$data);
+    }
+    public function event()
+    {
+        $event = $this->fetch_all_event();
+        return view('frontend.event',$event);
+    }
 }

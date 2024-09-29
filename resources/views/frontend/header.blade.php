@@ -9,12 +9,27 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="{{route('front.index')}}" class="active">Home<br></a></li>
-                {{-- <li><a href="{{route('front.about')}}">About</a></li> --}}
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="trainers.html">Trainers</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="{{ route('front.index') }}" class="active">Home<br></a></li>
+                <li class="dropdown"><a href="{{ route('front.about') }}"><span>About</span> <i
+                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="#">Who we are</a></li>
+                        <li><a href="#">BOD</a></li>
+                        <li><a href="#">Message</a></li>
+                        <li><a href="#">Faculty Staff</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown"><a href=""><span>Program</span> <i
+                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="#">BBA</a></li>
+                        <li><a href="#">BCIS</a></li>
+                        <li><a href="#">BBA-Finance</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Notices</a></li>
+                <li><a href="">Events</a></li>
                 <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
@@ -34,7 +49,7 @@
                         <li><a href="#">Dropdown 4</a></li>
                     </ul>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{route('front.contact')}}">Contact</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>

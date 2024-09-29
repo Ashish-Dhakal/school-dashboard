@@ -179,7 +179,7 @@
                     data-aos-delay="100">
                     <div class="d-flex justify-content-between section-title">
                         <h2 class="d-inline-block">Events</h2>
-                        <a href="#">View All Events</a>
+                        <a href="{{route('front.event')}}">View All Events</a>
                     </div>
                     @foreach ($events as $event)
                         <div class="d-flex flex-wrap">
@@ -213,8 +213,8 @@
 
                 <div class="col-lg-6 order-2 order-lg-1  " data-aos="fade-up" data-aos-delay="100">
                     <div class="d-flex justify-content-between section-title">
-                        <h2 class="d-inline-block  ">Notices</h2>
-                        <a href="#">View All Notice</a>
+                        <h2 class="d-inline-block">Notices</h2>
+                        <a href="{{route('front.notice')}}">View All Notice</a>
                     </div>
                     @foreach ($notices as $notice)
                         <div class="d-flex flex-wrap">
