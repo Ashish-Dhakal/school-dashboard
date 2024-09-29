@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
                 'about-us' => 'about.index',
                 'event' => 'event.index',
                 'notice' => 'notice.index',
+                'blogs' => 'blog.index'
             ];
 
             // Define a mapping of post types to icons

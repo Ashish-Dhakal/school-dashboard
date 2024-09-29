@@ -13,8 +13,9 @@ class FrontController extends BaseController
         $program = $this->fetch_all_program();
         $notice = $this->fetch_all_notice();
         $event = $this->fetch_all_event();
+        $blog = $this->fetch_all_blog();
     
-        $data = array_merge($program, $notice, $event);
+        $data = array_merge($program, $notice, $event, $blog);
     
         return view('frontend.index', $data);
     }

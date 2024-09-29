@@ -3,14 +3,14 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'About')
+@section('content_header_title', 'Blog')
 {{-- @section('content_header_subtitle', '') --}}
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
 
-        <a href="{{ route('about.create') }}" class="btn btn-primary"> Add Content</a>
+        <a href="{{ route('blog.create') }}" class="btn btn-primary"> Add Content</a>
         <!-- Bootstrap Table -->
         <table class="table table-striped table-bordered mt-4">
             <thead class="thead-dark">
@@ -27,22 +27,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($abouts as $about)
+                @foreach ($blogs as $blog)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $about->title }}</td>
-                        <td>{{ $about->slug }}</td>
-                        <td>{{ \Illuminate\Support\Str::limit($about->description, 100, '...') }}</td>
-                        <td>{{ \Illuminate\Support\Str::limit($about->sub_desc, 100, '...') }}</td>
-                        <td>{{ $about->gallery->gallery_name??'-'}}</td>
-                        <td>{{ $about->postType->name??'-' }}</td>
-                        <td><img src="{{ asset('images/' . $about->feature_image) }}" alt="Feature Image" style="max-width: 100px;"></td>
+                        <td>{{ $blog->title }}</td>
+                        <td>{{ $blog->slug }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($blog->description, 100, '...') }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($blog->sub_desc, 100, '...') }}</td>
+                        <td>{{ $blog->gallery->gallery_name??'-'}}</td>
+                        <td>{{ $blog->postType->name??'-' }}</td>
+                        <td><img src="{{ asset('images/' . $blog->feature_image) }}" alt="Feature Image" style="max-width: 100px;"></td>
 
                         <td> 
                             <div class="d-flex">
-                                <a href="{{ route('about.edit', $about->slug) }}"
+                                <a href="{{ route('blog.edit', $blog->slug) }}"
                                     class="btn btn-primary">Edit</a>
-                                <form action="{{ route('about.destroy', $about->slug) }}" method="POST"
+                                <form action="{{ route('blog.destroy', $blog->slug) }}" method="POST"
                                     style="display: inline-block">
                                     @csrf
                                     @method('DELETE')

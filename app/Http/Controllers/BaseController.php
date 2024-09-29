@@ -43,4 +43,11 @@ class BaseController extends Controller
         $data['abouts'] = $this->fetch_all_by_posttype_slug('about-us');
         return $data;
     }
+
+      // Fetch blogs content
+      public function fetch_all_blog()
+      {
+          $data['blogs'] = $this->fetch_all_by_posttype_slug('blogs');
+          return $data;
+      }
 }

@@ -33,7 +33,7 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $event->title ?? '-' }}</td>
                         <td>{{ $event->slug ?? '-' }}</td>
-                        <td>{{ $event->description ?? '-' }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($event->description, 100, '...') }}</td>
                         <td>{{ $event->date ?? '-' }}</td>
                         <td>{{ $event->gallery->gallery_name ?? '-' }}</td>
                         <td>{{ $event->postType->name ?? '-' }}</td>

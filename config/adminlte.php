@@ -312,17 +312,17 @@ return [
         ],
         [
             'text' => 'blog',
-            'url' => 'admin/blog',
+            'url' => 'admin/blogs',
             'can' => 'manage-blog',
         ],
         [
             'text' => ' Post Type',
-            'url' => 'back-post-type',
+            'url' => 'dash/post-type',
             'icon' => 'fas fa-paste',
         ],
         [
             'text' => ' Gallery',
-            'url' => 'back-gallery',
+            'url' => 'dash/gallery',
             'icon' => 'far fa-fw fa-image',
         ],
       
@@ -330,7 +330,7 @@ return [
 
         [
             'text' => ' Message from',
-            'url' => 'back-message',
+            'url' => 'dash/message',
             'icon' => 'far fa-fw fa-message',
         ],
        

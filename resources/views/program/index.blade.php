@@ -32,8 +32,8 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $program->title }}</td>
                         <td>{{ $program->slug }}</td>
-                        <td>{{ $program->description }}</td>
-                        <td>{{ $program->sub_desc }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($program->description, 100, '...') }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($program->sub_desc, 100, '...') }}</td>
                         <td>{{ $program->gallery->gallery_name??'-'}}</td>
                         <td>{{ $program->postType->name??'-' }}</td>
                         <td><img src="{{ asset('images/' . $program->feature_image) }}" alt="Feature Image" style="max-width: 100px;"></td>
