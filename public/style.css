@@ -681,13 +681,15 @@ section,
 
 .event-item {
   padding: 5px;
-  margin:0px 0px 5px 0px;
+ 
   max-height: 110px;
- min-width:50%;
+ width:49%;
  max-width:50%;
     /* shadow */
  
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #00000070;
+    border-radius: 5px;
 
 }
 .events .content h3{

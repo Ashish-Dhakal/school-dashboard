@@ -28,8 +28,8 @@
                         <li><a href="#">BBA-Finance</a></li>
                     </ul>
                 </li>
-                <li><a href="">Notices</a></li>
-                <li><a href="">Events</a></li>
+                <li><a href="{{route('front.notice')}}">Notices</a></li>
+                <li><a href="{{route('front.event')}}">Events</a></li>
                 <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
@@ -54,7 +54,7 @@
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <a class="btn-getstarted" href="courses.html">Get Started</a>
+        <a class="btn-getstarted" href="">Get Started</a>
 
     </div>
 </header>

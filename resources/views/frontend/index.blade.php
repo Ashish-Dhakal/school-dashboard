@@ -181,9 +181,9 @@
                         <h2 class="d-inline-block">Events</h2>
                         <a href="{{route('front.event')}}">View All Events</a>
                     </div>
+                    <div class="d-flex flex-wrap gap-2 justify-content-center">
                     @foreach ($events as $event)
-                        <div class="d-flex flex-wrap">
-                            <a class="event-item d-inline-block"
+                            <a class="event-item  bg-white d-inline-block"
                                 href="{{ route('content', ['post_type' => $event->postType->slug, 'post_content' => $event->slug]) }}"
                                 target="_blank">
                                 <div class=" d-flex m-1">
@@ -207,8 +207,8 @@
                                     </div>
                                 </div>
                             </a>
+                            @endforeach
                         </div>
-                    @endforeach
                 </div>
 
                 <div class="col-lg-6 order-2 order-lg-1  " data-aos="fade-up" data-aos-delay="100">
@@ -216,9 +216,10 @@
                         <h2 class="d-inline-block">Notices</h2>
                         <a href="{{route('front.notice')}}">View All Notice</a>
                     </div>
-                    @foreach ($notices as $notice)
-                        <div class="d-flex flex-wrap">
-                            <a class="event-item d-inline-block"
+                    <div class="d-flex flex-wrap  gap-2  justify-content-between">
+                        
+                            @foreach ($notices as $notice)
+                            <a class="event-item  bg-white d-inline-block"
                                 href="{{ route('content', ['post_type' => $notice->postType->slug, 'post_content' => $notice->slug]) }}"
                                 target="_blank">
                                 <div class=" d-flex m-1">
@@ -243,8 +244,8 @@
                                     </div>
                                 </div>
                             </a>
+                            @endforeach
                         </div>
-                    @endforeach
 
                 </div>
             </div>
