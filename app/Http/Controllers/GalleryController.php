@@ -52,7 +52,7 @@ class GalleryController extends Controller
                     $imageName = time() . '_' . $image->getClientOriginalName();
 
                     // Move image to the public directory
-                    $image->move(public_path('images/gallery'), $imageName);
+                    $image->move(public_path('images'), $imageName);
 
                     // Ensure the image was successfully uploaded before storing in DB
                     if ($imageName) {

@@ -15,7 +15,7 @@ class PostTypeController extends BaseController
      */
     public function index()
     {
-        $data['postTypes'] = PostType::paginate(4);
+        $data['postTypes'] = PostType::paginate(5);
         return view('post-type.index', $data);
     }
 

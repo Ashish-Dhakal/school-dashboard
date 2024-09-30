@@ -131,7 +131,7 @@ class ProgramController extends Controller
 
             $image->move(public_path('images'), $image_name);
 
-            if ($content->feature_image && file_exists(public_path('images/program/' . $content->feature_image))) {
+            if ($content->feature_image && file_exists(public_path('images/' . $content->feature_image))) {
                 unlink(public_path('images' . $content->feature_image));
             }
 

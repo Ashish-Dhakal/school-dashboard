@@ -41,6 +41,11 @@ class DatabaseSeeder extends Seeder
             'slug' =>'event'
         ]);
 
+        PostType::create([
+            'name'=>'Blogs',
+            'slug' =>'blogs'
+        ]);
+
         
         
     }
