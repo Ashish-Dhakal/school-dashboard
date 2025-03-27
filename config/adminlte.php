@@ -329,9 +329,9 @@ return [
         ['header' => 'CONTENT FORM'],
 
         [
-            'text' => ' Message from',
+            'text' => ' Message',
             'url' => 'dash/message',
-            'icon' => 'far fa-fw fa-message',
+            'icon' => 'fas fa-fw fa-message',
         ],
        
     ],

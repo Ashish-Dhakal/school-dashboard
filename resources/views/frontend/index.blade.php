@@ -34,8 +34,7 @@
             <div class="row gy-4">
 
                 <div class="col-lg-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-                    <img width="100%"
-                        src="https://i0.pickpik.com/photos/661/876/856/entrepreneur-computer-man-office-preview.jpg"
+                    <img width="100%" src="https://www.inspirationschoolkgm.org/images/MrAnurag%20Mathur2022_HOME.jpg"
                         class="img-fluid" alt="">
                 </div>
 
@@ -179,10 +178,10 @@
                     data-aos-delay="100">
                     <div class="d-flex justify-content-between section-title">
                         <h2 class="d-inline-block">Events</h2>
-                        <a href="{{route('front.event')}}">View All Events</a>
+                        <a href="{{ route('front.event') }}">View All Events</a>
                     </div>
                     <div class="d-flex flex-wrap gap-2 justify-content-center">
-                    @foreach ($events as $event)
+                        @foreach ($events as $event)
                             <a class="event-item  bg-white d-inline-block"
                                 href="{{ route('content', ['post_type' => $event->postType->slug, 'post_content' => $event->slug]) }}"
                                 target="_blank">
@@ -207,18 +206,18 @@
                                     </div>
                                 </div>
                             </a>
-                            @endforeach
-                        </div>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="col-lg-6 order-2 order-lg-1  " data-aos="fade-up" data-aos-delay="100">
                     <div class="d-flex justify-content-between section-title">
                         <h2 class="d-inline-block">Notices</h2>
-                        <a href="{{route('front.notice')}}">View All Notice</a>
+                        <a href="{{ route('front.notice') }}">View All Notice</a>
                     </div>
                     <div class="d-flex flex-wrap  gap-2  justify-content-between">
-                        
-                            @foreach ($notices as $notice)
+
+                        @foreach ($notices as $notice)
                             <a class="event-item  bg-white d-inline-block"
                                 href="{{ route('content', ['post_type' => $notice->postType->slug, 'post_content' => $notice->slug]) }}"
                                 target="_blank">
@@ -244,8 +243,8 @@
                                     </div>
                                 </div>
                             </a>
-                            @endforeach
-                        </div>
+                        @endforeach
+                    </div>
 
                 </div>
             </div>

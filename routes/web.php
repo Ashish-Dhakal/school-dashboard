@@ -12,12 +12,20 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\PostTypeController;
+use App\Http\Controllers\MessageController;
 
 // Route::get('/', function () {
 //     return view('index');
 // });
 
 Auth::routes();
+
+Route::fallback(function () {
+    if (Auth::check()) {
+        return redirect()->route('program.index');
+    }
+    return redirect('/');
+});
 
 
 
@@ -93,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{slug}', [EventController::class, 'destroy'])->name('destroy');
     });
 
-    // route for the 
+    // route for the Blog
     Route::prefix('/dash/blogs')->name('blog.')->group(function () {
         Route::get('/', [BlogsController::class, 'index'])->name('index');
         Route::get('/create', [BlogsController::class, 'create'])->name('create');
@@ -101,6 +109,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{slug}', [BlogsController::class, 'edit'])->name('edit');
         Route::post('/update/{slug}', [BlogsController::class, 'update'])->name('update');
         Route::delete('/destroy/{slug}', [BlogsController::class, 'destroy'])->name('destroy');
+    });
+
+       // route for the Message
+       Route::prefix('/dash/message')->name('message.')->group(function () {
+        Route::get('/', [MessageController::class, 'index'])->name('index');
+        Route::get('/create', [MessageController::class, 'create'])->name('create');
+        Route::post('/store', [MessageController::class, 'store'])->name('store');
+        Route::get('/edit/{slug}', [MessageController::class, 'edit'])->name('edit');
+        Route::post('/update/{slug}', [MessageController::class, 'update'])->name('update');
+        Route::delete('/destroy/{slug}', [MessageController::class, 'destroy'])->name('destroy');
     });
 });
 
