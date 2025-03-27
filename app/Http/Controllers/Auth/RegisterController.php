@@ -21,14 +21,14 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -37,6 +37,10 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        // dd('adasda');
+
+        return redirect()->route('login');
+       
         $this->middleware('guest');
     }
 
