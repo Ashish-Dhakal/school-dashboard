@@ -21,31 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'ashish@test.com',
         ]);
 
-        PostType::create([
-            'name'=>'Program',
-            'slug' =>'program'
-        ]);
-
-        PostType::create([
-            'name'=>'About Us',
-            'slug' =>'about-us'
-        ]);
-
-        PostType::create([
-            'name'=>'Notice',
-            'slug' =>'notice'
-        ]);
-
-        PostType::create([
-            'name'=>'Event',
-            'slug' =>'event'
-        ]);
-
-        PostType::create([
-            'name'=>'Blogs',
-            'slug' =>'blogs'
-        ]);
-
+        $this->call(PostTypeSeeder::class);
         
         
     }
