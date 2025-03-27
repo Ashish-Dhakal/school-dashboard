@@ -129,3 +129,7 @@ Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact
 Route::get('/notice', [FrontController::class, 'notice'])->name('front.notice');
 Route::get('/event', [FrontController::class, 'event'])->name('front.event');
 Route::get('{post_type}/{post_content}' , [ContentController::class , 'show'])->name('content');
+
+Route::get('/register', function () {
+    return redirect()->route('login');
+});
