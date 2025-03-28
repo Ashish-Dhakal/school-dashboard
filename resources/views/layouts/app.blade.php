@@ -55,31 +55,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
+        // Configure Toastr
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        // Display validation errors
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}");
+                toastr.error("{{ $error }}", "Error!");
             @endforeach
         @endif
 
-        // DISPLAY THE SUCCESS MESSAGE ALSO
+        // Display success message
         @if (session('success'))
-            toastr.success("{{ session('success') }}");
+            toastr.success("{{ session('success') }}", "Success!");
+        @endif
+
+        // Display error message
+        @if (session('error'))
+            toastr.error("{{ session('error') }}", "Error!");
         @endif
     </script>
 @endpush
 
-{{-- Add common CSS customizations --}}
+{{-- Add common CSS --}}
 
 @push('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <style type="text/css">
         {{-- You can add AdminLTE customizations here --}}
-        /*
-        .card-header {
-            border-bottom: none;
-        }
-        .card-title {
-            font-weight: 600;
-        }
-        */
     </style>
 @endpush
