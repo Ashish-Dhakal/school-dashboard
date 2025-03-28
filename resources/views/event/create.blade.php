@@ -3,18 +3,17 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Event Create')
+@section('content_header_title', 'Event')
+@section('content_header_subtitle', 'Create Event')
+
+{{-- Include CKEditor Component --}}
+@include('components.ckeditor')
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
+        <a href="{{ route('event.index') }}" class="btn btn-primary">Back</a>
 
-
-        <a href="{{ route('event.index') }}" class="btn btn-primary"> Back</a>
-
-
-        <!-- Modal -->
         <form action="{{ route('event.store') }}" method="post" class="mb-4" enctype="multipart/form-data">
             @csrf
 
@@ -22,18 +21,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title"
-                            placeholder="Enter title">
+                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
                     </div>
                 </div>
 
-
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date"
-                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" onfocus="this.showPicker()">
-
+                        <label for="pdf">PDF/Image</label>
+                        <input type="file" class="form-control" id="pdf" name="pdf" required>
                     </div>
                 </div>
             </div>
@@ -42,22 +37,19 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{ old('description') }}</textarea>
+                        <textarea class="form-control editor" id="description" name="description">{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>
 
             <div class="row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="pdf">event File (Image or PDF)</label>
-                        <input type="file" name="pdf" id="pdf" accept="image/*,application/pdf">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}" required>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="galleries_id">Gallery</label>
@@ -69,32 +61,35 @@
                         </select>
                     </div>
                 </div>
+            </div>
 
-
+            <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="post_types_id">Post Types</label>
-                        <select class="form-control" id="post_types_id" name="post_types_id">
+                        <select class="form-control" id="post_types_id" name="post_types_id" required>
                             <option value="{{ $posttype->pluck('id')->implode(',') }}">
                                 {{ $posttype->pluck('slug')->implode(' ') }}
                             </option>
                         </select>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="is_featureNotice" name="is_featureNotice"
+                                {{ old('is_featureNotice') ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="is_featureNotice">Featured Event</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-check form-switch my-3">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="is_featureNotice"
-                    value="0" unchecked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">Feature Notice</label>
-            </div>
-
-
-            <div class="">
-                <button type="submit" class="btn btn-primary">Add</button>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Create Event</button>
             </div>
         </form>
-
     </div>
 @stop
 

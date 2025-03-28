@@ -3,18 +3,17 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'About Create')
+@section('content_header_title', 'About')
+@section('content_header_subtitle', 'Create About')
+
+{{-- Include CKEditor Component --}}
+@include('components.ckeditor')
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
+        <a href="{{ route('about.index') }}" class="btn btn-primary">Back</a>
 
-
-        <a href="{{ route('about.index') }}" class="btn btn-primary"> Back</a>
-
-
-        <!-- Modal -->
         <form action="{{ route('about.store') }}" method="post" class="mb-4" enctype="multipart/form-data">
             @csrf
 
@@ -22,15 +21,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title"
-                            placeholder="Enter title">
+                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="feature_image">Feature Image</label>
-                        <input type="file" class="form-control" id="feature_image" name="feature_image">
+                        <input type="file" class="form-control" id="feature_image" name="feature_image" required>
                     </div>
                 </div>
             </div>
@@ -39,7 +37,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{ old('description') }}</textarea>
+                        <textarea class="form-control editor" id="description" name="description">{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -48,7 +46,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="sub_desc">Sub Description</label>
-                        <textarea class="form-control" id="sub_desc" name="sub_desc" placeholder="Enter sub description">{{ old('sub_desc') }}</textarea>
+                        <textarea class="form-control editor" id="sub_desc" name="sub_desc">{{ old('sub_desc') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -66,27 +64,22 @@
                     </div>
                 </div>
 
-                
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="post_types_id">Post Types</label>
-                        <select class="form-control" id="post_types_id" name="post_types_id">
+                        <select class="form-control" id="post_types_id" name="post_types_id" required>
                             <option value="{{ $posttype->pluck('id')->implode(',') }}">
                                 {{ $posttype->pluck('slug')->implode(' ') }}
-                            </option>                           
+                            </option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-3"></div>
-
-
-            <div class="">
-                <button type="submit" class="btn btn-primary">Add</button>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Create About</button>
             </div>
         </form>
-
     </div>
 @stop
 

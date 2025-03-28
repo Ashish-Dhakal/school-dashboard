@@ -3,50 +3,40 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'About Create')
+@section('content_header_title', 'About')
+@section('content_header_subtitle', 'Edit About')
+
+{{-- Include CKEditor Component --}}
+@include('components.ckeditor')
 
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
+        <a href="{{ route('about.index') }}" class="btn btn-primary">Back</a>
 
-
-        <a href="{{ route('about.index') }}" class="btn btn-primary"> Back</a>
-
-
-        <!-- Modal -->
-        <form action="{{ route('about.update', $about->slug) }}" method="post" class="mb-4"
-            enctype="multipart/form-data">
+        <form action="{{ route('about.update', $about->slug) }}" method="post" class="mb-4" enctype="multipart/form-data">
             @csrf
 
             <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title"
-                            value="{{ $about->title }}">
+                        <input type="text" class="form-control" id="title" name="title" value="{{ $about->title }}" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="feature_image">Feature Image</label>
-                        
                         @if ($about->feature_image)
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <img src="{{ asset('images/' . $about->feature_image) }}" alt="Feature Image"
                                     style="max-width: 100px;">
                             </div>
-                        @else
-                            <p>No image available</p>
                         @endif
                         <input type="file" class="form-control" id="feature_image" name="feature_image">
-
                         <input type="hidden" name="current_image" value="{{ $about->feature_image }}">
                     </div>
-
-
-
                 </div>
             </div>
 
@@ -54,7 +44,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description"> {{ $about->description }}</textarea>
+                        <textarea class="form-control editor" id="description" name="description">{{ $about->description }}</textarea>
                     </div>
                 </div>
             </div>
@@ -63,7 +53,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="sub_desc">Sub Description</label>
-                        <textarea class="form-control" id="sub_desc" name="sub_desc">{{ $about->sub_desc }}</textarea>
+                        <textarea class="form-control editor" id="sub_desc" name="sub_desc">{{ $about->sub_desc }}</textarea>
                     </div>
                 </div>
             </div>
@@ -79,14 +69,13 @@
                                 <option value="{{ $gallery->id }}">{{ $gallery->gallery_name }}</option>
                             @endforeach
                         </select>
-
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="post_types_id">Post Types</label>
-                        <select class="form-control" id="post_types_id" name="post_types_id">
+                        <select class="form-control" id="post_types_id" name="post_types_id" required>
                             <option value="{{ $posttype->pluck('id')->implode(',') }}">
                                 {{ $posttype->pluck('slug')->implode(' ') }}
                             </option>
@@ -95,14 +84,10 @@
                 </div>
             </div>
 
-            <div class="row mt-3"></div>
-
-
-            <div class="">
-                <button type="submit" class="btn btn-primary">Add</button>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Update About</button>
             </div>
         </form>
-
     </div>
 @stop
 
