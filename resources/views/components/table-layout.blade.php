@@ -2,13 +2,17 @@
 
 <div class="container-fluid">
     <div class="card shadow-sm">
-        <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
-            <h5 class="card-title mb-0 text-primary">{{ $title }}</h5>
+        <div class="card-header d-flex justify-content-between align-items-center bg-white border-bottom py-3">
+            <div class="flex-grow-1">
+                <h5 class="card-title mb-0 text-primary">{{ $title }}</h5>
+            </div>
             @if($createUrl)
-                <a href="{{ $createUrl }}" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    <span class="d-none d-sm-inline-block ms-1">Add New</span>
-                </a>
+                <div class="action-buttons ms-auto">
+                    <a href="{{ $createUrl }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        <span class="d-none d-sm-inline-block ms-1">Add New</span>
+                    </a>
+                </div>
             @endif
         </div>
         <div class="card-body">
