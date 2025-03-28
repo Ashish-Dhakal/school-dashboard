@@ -6,6 +6,9 @@
 @section('content_header_title', 'Home')
 @section('content_header_subtitle', 'Program Create')
 
+{{-- Include CKEditor Component --}}
+@include('components.ckeditor')
+
 {{-- Content body: main page content --}}
 @section('content_body')
     <div class="container">
@@ -39,7 +42,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter description">{{ old('description') }}</textarea>
+                        <textarea class="form-control editor" id="description" name="description" placeholder="Enter description">{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -48,7 +51,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="sub_desc">Sub Description</label>
-                        <textarea class="form-control" id="sub_desc" name="sub_desc" placeholder="Enter sub description">{{ old('sub_desc') }}</textarea>
+                        <textarea class="form-control editor" id="sub_desc" name="sub_desc" placeholder="Enter sub description">{{ old('sub_desc') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -95,41 +98,4 @@
 {{-- Push extra CSS --}}
 @push('css')
     <!-- Add any extra CSS for the table if needed -->
-@endpush
-
-{{-- Push extra JS --}}
-@push('js')
-    <script>
-        // Initialize CKEditor for description
-        ClassicEditor
-            .create(document.querySelector('#description'), {
-                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable'],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        // Initialize CKEditor for sub description
-        ClassicEditor
-            .create(document.querySelector('#sub_desc'), {
-                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable'],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
 @endpush
