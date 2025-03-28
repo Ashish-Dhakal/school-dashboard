@@ -14,7 +14,7 @@
 
         <form action="{{ route('gallery.update', $gallery->id) }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('POST')
             <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="form-group">

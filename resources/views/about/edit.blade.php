@@ -16,7 +16,7 @@
         action="{{ route('about.update', $about->slug) }}" 
         method="POST" 
         :hasFiles="true">
-        @method('PUT')
+        @method('POST')
         
         <div class="row">
             <div class="col-md-8">

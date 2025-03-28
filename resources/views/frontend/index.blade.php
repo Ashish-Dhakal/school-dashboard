@@ -121,16 +121,16 @@
                             <div class="card-img">
                                 {{-- <img src="../../assets/img/events-item-1.jpg" alt="..."> --}}
 
-                                <img src="{{ asset('images/' . $program->feature_image) }}" alt="Feature Image">
+                                <img src="{{ asset('images/' . $program->feature_image) }}" height="200px" width="600px" alt="Feature Image">
                             </div>
                             <div class="card-body">
-                                <a href="">
+                                {{-- <a href=""> --}}
 
 
-                                    <h5 class="card-title"><a
+                                    <h5 class="card-title m-0"><a
                                             href="{{ route('content', ['post_type' => $program->postType->slug, 'post_content' => $program->slug]) }}">{{ $program->title }}</a>
-                                    </h5>
-                                    <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
+                                    {{-- </h5> --}}
+                                    {{-- <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p> --}}
 
                                 </a>
 
@@ -139,32 +139,6 @@
                     </div>
                 @endforeach
 
-
-
-
-                {{-- <div class="col-md-3 d-flex align-items-stretch">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="../../assets/img/events-item-1.jpg" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="">Neb+2 Management</a></h5>
-                            <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex align-items-stretch">
-                    <div class="card">
-                        <div class="card-img">
-                            <img src="../../assets/img/events-item-2.jpg" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="">Bsc Csit</a></h5>
-                            <p class="fst-italic text-center">Sunday, November 15th at 7:00 pm</p>
-                        </div>
-                    </div>
-
-                </div> --}}
             </div>
 
         </div>
