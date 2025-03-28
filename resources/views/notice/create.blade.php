@@ -2,7 +2,7 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Welcome')
+@section('subtitle', 'Notice')
 @section('content_header_title', 'Notice')
 @section('content_header_subtitle', 'Create Notice')
 
@@ -11,93 +11,154 @@
 
 {{-- Content body: main page content --}}
 @section('content_body')
-    <div class="container">
-        <a href="{{ route('notice.index') }}" class="btn btn-primary">Back</a>
+    <x-form-layout 
+        title="Create New Notice" 
+        action="{{ route('notice.store') }}" 
+        method="POST" 
+        :hasFiles="true">
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="title" class="form-label required">Title</label>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" 
+                                id="title" name="title" value="{{ old('title') }}"
+                                placeholder="Enter notice title">
+                            @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        <form action="{{ route('notice.store') }}" method="post" class="mb-4" enctype="multipart/form-data">
-            @csrf
+                        <div class="form-group mt-4">
+                            <label for="description" class="form-label required">Description</label>
+                            <textarea class="form-control editor @error('description') is-invalid @enderror" 
+                                id="description" name="description" rows="5">{{ old('description') }}</textarea>
+                            @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="pdf">PDF/Image</label>
-                        <input type="file" class="form-control" id="pdf" name="pdf" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control editor" id="description" name="description">{{ old('description') }}</textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}" required>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="galleries_id">Gallery</label>
-                        <select class="form-control" id="galleries_id" name="galleries_id">
-                            <option value="">Select Gallery</option>
-                            @foreach ($galleries as $gallery)
-                                <option value="{{ $gallery->id }}">{{ $gallery->gallery_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="post_types_id">Post Types</label>
-                        <select class="form-control" id="post_types_id" name="post_types_id" required>
-                            <option value="{{ $posttype->pluck('id')->implode(',') }}">
-                                {{ $posttype->pluck('slug')->implode(' ') }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="is_featureNotice" name="is_featureNotice" {{ old('is_featureNotice') ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="is_featureNotice">Featured Notice</label>
+                        <div class="form-group mt-4">
+                            <label for="date" class="form-label required">Date</label>
+                            <input type="date" class="form-control @error('date') is-invalid @enderror" 
+                                id="date" name="date" value="{{ old('date') }}">
+                            @error('date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Create Notice</button>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title">Notice Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="feature_image" class="form-label">Feature Image</label>
+                            <input type="file" class="form-control @error('feature_image') is-invalid @enderror" 
+                                id="feature_image" name="feature_image" accept="image/*">
+                            @error('feature_image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div id="imagePreview" class="image-preview mt-2"></div>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label for="galleries_id" class="form-label">Gallery</label>
+                            <select class="form-control @error('galleries_id') is-invalid @enderror" 
+                                id="galleries_id" name="galleries_id">
+                                <option value="">Select Gallery</option>
+                                @foreach($galleries as $gallery)
+                                    <option value="{{ $gallery->id }}" 
+                                        {{ old('galleries_id') == $gallery->id ? 'selected' : '' }}>
+                                        {{ $gallery->gallery_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('galleries_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label for="post_types_id" class="form-label required">Post Type</label>
+                            <select class="form-control @error('post_types_id') is-invalid @enderror" 
+                                id="post_types_id" name="post_types_id">
+                                <option value="{{ $posttype->pluck('id')->implode(',') }}">
+                                    {{ $posttype->pluck('slug')->implode(' ') }}
+                                </option>
+                            </select>
+                            @error('post_types_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </x-form-layout>
 @stop
 
 {{-- Push extra CSS --}}
 @push('css')
-    <!-- Add any extra CSS for the table if needed -->
+<style>
+    .required:after {
+        content: ' *';
+        color: red;
+    }
+    
+    .custom-file-container {
+        position: relative;
+    }
+    
+    .custom-file-container .preview {
+        max-width: 100%;
+        height: 150px;
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    
+    .custom-file-container .preview img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+    
+    .select2-container--bootstrap4 .select2-selection--single {
+        height: calc(2.25rem + 2px) !important;
+    }
+</style>
 @endpush
 
-{{-- Push extra JS --}}
 @push('js')
-    
+<script>
+    $(document).ready(function() {
+        // Image preview
+        $('#feature_image').change(function() {
+            const file = this.files[0];
+            const preview = $('#imagePreview');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.html(`<img src="${e.target.result}" alt="Preview">`);
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.empty();
+            }
+        });
+    });
+</script>
 @endpush

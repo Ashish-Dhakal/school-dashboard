@@ -2,7 +2,7 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Welcome')
+@section('subtitle', 'Notice')
 @section('content_header_title', 'Notice')
 @section('content_header_subtitle', 'Edit Notice')
 
@@ -11,105 +11,189 @@
 
 {{-- Content body: main page content --}}
 @section('content_body')
-    <div class="container">
-        <a href="{{ route('notice.index') }}" class="btn btn-primary">Back</a>
+    <x-form-layout 
+        title="Edit Notice: {{ $notice->title }}" 
+        action="{{ route('notice.update', $notice->slug) }}" 
+        method="POST" 
+        :hasFiles="true">
+        @method('PUT')
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label required">Title</label>
+                            <input type="text" 
+                                class="form-control @error('title') is-invalid @enderror" 
+                                name="title" 
+                                value="{{ old('title', $notice->title) }}" 
+                                placeholder="Enter notice title">
+                            @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        <form action="{{ route('notice.update', $notice->slug) }}" method="post" class="mb-4" enctype="multipart/form-data">
-            @csrf
+                        <div class="form-group mt-4">
+                            <label class="form-label required">Description</label>
+                            <textarea class="form-control editor @error('description') is-invalid @enderror" 
+                                name="description" 
+                                rows="5">{{ old('description', $notice->description) }}</textarea>
+                            @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ $notice->title }}" required>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="pdf">PDF/Image</label>
-                        @if ($notice->pdf)
-                            <div class="mb-2">
-                                @if (in_array(pathinfo($notice->pdf, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif', 'bmp']))
-                                    <img src="{{ asset('images/' . $notice->pdf) }}" alt="Notice Image" style="max-width: 100px;">
-                                @else
-                                    <a href="{{ asset('images/' . $notice->pdf) }}" target="_blank">View Current PDF</a>
-                                @endif
-                            </div>
-                        @endif
-                        <input type="file" class="form-control" id="pdf" name="pdf">
-                        <input type="hidden" name="current_pdf" value="{{ $notice->pdf }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control editor" id="description" name="description">{{ $notice->description }}</textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" value="{{ $notice->date }}" required>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="galleries_id">Gallery</label>
-                        <select class="form-control" id="galleries_id" name="galleries_id">
-                            <option value="{{ $notice->gallery?->id ?? '' }}">
-                                {{ $notice->gallery ? $notice->gallery->gallery_name : 'Select a gallery' }}</option>
-                            @foreach ($galleries as $gallery)
-                                <option value="{{ $gallery->id }}">{{ $gallery->gallery_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="post_types_id">Post Types</label>
-                        <select class="form-control" id="post_types_id" name="post_types_id" required>
-                            <option value="{{ $posttype->pluck('id')->implode(',') }}">
-                                {{ $posttype->pluck('slug')->implode(' ') }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="is_featureNotice" name="is_featureNotice"
-                                {{ $notice->is_featureNotice ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="is_featureNotice">Featured Notice</label>
+                        <div class="form-group mt-4">
+                            <label class="form-label required">Date</label>
+                            <input type="date" 
+                                class="form-control @error('date') is-invalid @enderror" 
+                                name="date" 
+                                value="{{ old('date', $notice->date) }}">
+                            @error('date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Update Notice</button>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title">Notice Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Feature Image</label>
+                            <div class="custom-file-container" data-upload-id="featureImage">
+                                @if ($notice->feature_image)
+                                    <div class="current-image mb-3">
+                                        <label class="d-block text-muted mb-2">Current Image</label>
+                                        <img src="{{ asset('images/' . $notice->feature_image) }}" 
+                                            alt="Current Feature Image" 
+                                            class="img-fluid rounded">
+                                    </div>
+                                @endif
+                                
+                                <input type="file" 
+                                    class="form-control custom-file-input @error('feature_image') is-invalid @enderror" 
+                                    name="feature_image" 
+                                    id="feature_image"
+                                    accept="image/*">
+                                <div class="preview mt-2">
+                                    <small class="text-muted">Upload new image to change</small>
+                                </div>
+                                
+                                <input type="hidden" name="current_image" value="{{ $notice->feature_image }}">
+                            </div>
+                            @error('feature_image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label class="form-label">Gallery</label>
+                            <select class="form-control select2 @error('galleries_id') is-invalid @enderror" 
+                                name="galleries_id">
+                                <option value="">Select Gallery</option>
+                                @foreach ($galleries as $gallery)
+                                    <option value="{{ $gallery->id }}" 
+                                        {{ old('galleries_id', $notice->gallery?->id) == $gallery->id ? 'selected' : '' }}>
+                                        {{ $gallery->gallery_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('galleries_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label class="form-label required">Post Type</label>
+                            <select class="form-control select2 @error('post_types_id') is-invalid @enderror" 
+                                name="post_types_id">
+                                <option value="{{ $posttype->pluck('id')->implode(',') }}">
+                                    {{ $posttype->pluck('slug')->implode(' ') }}
+                                </option>
+                            </select>
+                            @error('post_types_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </x-form-layout>
 @stop
 
 {{-- Push extra CSS --}}
 @push('css')
-    <!-- Add any extra CSS for the table if needed -->
+<style>
+    .required:after {
+        content: ' *';
+        color: red;
+    }
+    
+    .custom-file-container {
+        position: relative;
+    }
+    
+    .custom-file-container .current-image img {
+        max-height: 200px;
+        width: auto;
+    }
+    
+    .custom-file-container .preview {
+        max-width: 100%;
+        height: 150px;
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    
+    .custom-file-container .preview img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+    
+    .select2-container--bootstrap4 .select2-selection--single {
+        height: calc(2.25rem + 2px) !important;
+    }
+</style>
 @endpush
 
-{{-- Push extra JS --}}
 @push('js')
-  
+<script>
+    $(document).ready(function() {
+        // Initialize Select2
+        $('.select2').select2({
+            theme: 'bootstrap4',
+            width: '100%'
+        });
+        
+        // Image preview
+        $('#feature_image').change(function() {
+            const file = this.files[0];
+            const preview = $(this).siblings('.preview');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.html(`<img src="${e.target.result}" alt="Preview">`);
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.html('Upload new image to change');
+            }
+        });
+    });
+</script>
 @endpush
