@@ -44,7 +44,8 @@ class EventController extends Controller
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'pdf' => 'required|mimes:jpg,jpeg,png,gif,bmp,pdf',
+            'feature_image' => 'required|mimes:jpg,jpeg,png,gif',
+            'pdf' => 'required|mimes:pdf',
             'date' => 'required',
             'is_featureNotice' => 'nullable|boolean'
         ]);
@@ -66,6 +67,7 @@ class EventController extends Controller
         $content->date = $validatedData['date'];
         $content->galleries_id = $validatedData['galleries_id'];
         $content->post_types_id = $validatedData['post_types_id'];
+        $content->pdf = $validatedData['feature_image'];
         $content->pdf = $validatedData['pdf'];
         $content->is_featureNotice = $request->has('is_featureNotice') ? 1 : 0;
 

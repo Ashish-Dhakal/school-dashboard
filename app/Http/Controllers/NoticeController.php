@@ -42,7 +42,7 @@ class NoticeController extends Controller
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'pdf' => 'required|mimes:jpg,jpeg,png,gif,bmp,pdf',
+            'feature_image' => 'required|mimes:jpg,jpeg,png,gif,bmp,pdf',
             'date' => 'required',
             'is_featureNotice' => 'nullable|boolean'
 
@@ -179,9 +179,9 @@ class NoticeController extends Controller
 
         if ($content) {
             $content->delete();
-            return redirect()->route('event.index')->with('success', 'Content deleted successfully.');
+            return redirect()->route('notice.index')->with('success', 'Content deleted successfully.');
         }
 
-        return redirect()->route('event.index')->with('error', 'Content not found.');
+        return redirect()->route('notice.index')->with('error', 'Content not found.');
     }
 }

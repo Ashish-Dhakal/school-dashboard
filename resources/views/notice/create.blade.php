@@ -61,8 +61,17 @@
                         <div class="form-group">
                             <label for="feature_image" class="form-label">Feature Image</label>
                             <input type="file" class="form-control @error('feature_image') is-invalid @enderror" 
-                                id="feature_image" name="feature_image" accept="image/*">
+                                id="feature_image" name="feature_image" accept="pdf/*, image/*">
                             @error('feature_image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div id="imagePreview" class="image-preview mt-2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pdf" class="form-label">PDF</label>
+                            <input type="file" class="form-control @error('pdf') is-invalid @enderror" 
+                                id="pdf" name="pdf" accept="application/pdf">
+                            @error('pdf')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <div id="imagePreview" class="image-preview mt-2"></div>
