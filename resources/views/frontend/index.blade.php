@@ -8,7 +8,7 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section ">
         <div>
-            <img class="bg-image hover-zoom" src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+            <img class="bg-image hover-zoom" src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
         </div>
 
 
@@ -240,6 +240,7 @@
                         data-aos-delay="100">
                         <div class="card-item">
                             <div class="card-img">
+                                {{ dd( asset('images/' . $program->feature_image) ) }})}}
                                 <img src="{{ asset('images/' . $program->feature_image) }}" class="img-fluid"
                                     alt="Feature Image">
                             </div>
@@ -279,57 +280,57 @@
             <div class="row">
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://navodit.edu.np/wps/wp-content/uploads/2023/07/IMG_20230703_122114-scaled.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://navodit.edu.np/wps/wp-content/uploads/2022/07/1655634078197-scaled.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://navodit.edu.np/wps/wp-content/uploads/2023/05/IMG_0059-scaled.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://navodit.edu.np/wps/wp-content/uploads/2022/05/IMG-39dae58d217c47c79e788c61a9203f01-V.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://cca.edu.np/wp-content/uploads/2025/02/2-scaled.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://softwarica.edu.np/file-manager/photos/1/hero/Rectangle.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://biomedical.edu.np/media/uploads/home/slider/image/3_Com.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
                         <img data-imagebox="g1"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"
+                            src="https://www.collegenp.com/uploads/2024/01/Kathmandu-School-of-Central-State-Launches-Sports-Meet-2080.jpg"
                             class="img-fluid" alt="..." />
 
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="gallery-item">
-                        <img data-imagebox="g1" src="../../assets/img/course-1.jpg" class="img-fluid" alt="..." />
+                        <img data-imagebox="g1" src="https://kist-edu-np.s3.ap-south-1.amazonaws.com/uploads/album/value/91b849daad1b4778ba78848b7d95d2316e6adfd71674385551.jpg" class="img-fluid" alt="..." />
 
                     </div>
                 </div>

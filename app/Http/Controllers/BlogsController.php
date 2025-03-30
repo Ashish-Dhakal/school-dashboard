@@ -38,9 +38,9 @@ class BlogsController extends BaseController
     {
         
         $validatedData = $request->validate([
-            'title' => 'required|max:50',
+            'title' => 'required|max:150',
             'description' => 'required',
-            'sub_desc' => 'required',
+            'sub_desc' => '',
             'galleries_id' => '',
             'post_types_id' => 'required',
             'feature_image' => 'required|mimes:jpg,jpeg,png,gif,bmp',
@@ -105,12 +105,12 @@ class BlogsController extends BaseController
          $content = Content::where('slug', $slug)->firstOrFail();
 
          $validatedData = $request->validate([
-             'title' => 'required|max:50',
+             'title' => 'required|max:150',
              'description' => 'required',
-             'sub_desc' => 'required',
+             'sub_desc' => '',
              'galleries_id' => '',
              'post_types_id' => 'required',
-             'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp', 
+             'feature_image' => 'nullable|mimes:jpg,jpeg,png,gif,bmp,webp', 
          ]);
  
          // Update the content fields
@@ -131,9 +131,9 @@ class BlogsController extends BaseController
              $image->move(public_path('images'), $image_name);
  
              // Optionally delete the old image file if it exists
-             if ($content->feature_image && file_exists(public_path('images/' . $content->feature_image))) {
-                 unlink(public_path('images' . $content->feature_image));
-             }
+            //  if ($content->feature_image && file_exists(public_path('images/' . $content->feature_image))) {
+            //      unlink(public_path('images' . $content->feature_image));
+            //  }
  
              // Update the feature_image field with the new image name
              $content->feature_image = $image_name;

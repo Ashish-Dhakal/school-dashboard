@@ -14,11 +14,11 @@ class PostTypeSeeder extends Seeder
     public function run(): void
     {
         $postTypes = [
-            ['name' => 'Program', 'slug' => 'program'],
-            ['name' => 'About Us', 'slug' => 'about-us'],
-            ['name' => 'Notice', 'slug' => 'notice'],
-            ['name' => 'Event', 'slug' => 'event'],
-            ['name' => 'Blogs', 'slug' => 'blogs'],
+            ['name' => 'Program', 'slug' => 'program', 'is_pinned' => true],
+            ['name' => 'About Us', 'slug' => 'about-us','is_pinned' => true],
+            ['name' => 'Notice', 'slug' => 'notice', 'is_pinned' => true],
+            ['name' => 'Event', 'slug' => 'event', 'is_pinned' => true],
+            ['name' => 'Blogs', 'slug' => 'blogs', 'is_pinned' => true],
         ];
 
         PostType::insert($postTypes);

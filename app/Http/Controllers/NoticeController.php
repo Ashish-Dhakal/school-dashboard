@@ -42,7 +42,8 @@ class NoticeController extends Controller
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'feature_image' => 'required|mimes:jpg,jpeg,png,gif,bmp,pdf',
+            'feature_image' => 'mimes:jpg,jpeg,png,gif,bmp,webp',
+            'pdf' => 'mimes:pdf',
             'date' => 'required',
             'is_featureNotice' => 'nullable|boolean'
 

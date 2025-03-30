@@ -40,12 +40,12 @@ class EventController extends Controller
         // dd($request->all());
 
         $validatedData = $request->validate([
-            'title' => 'required|max:50',
+            'title' => 'required|max:150',
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'feature_image' => 'required|mimes:jpg,jpeg,png,gif',
-            'pdf' => 'required|mimes:pdf',
+            'feature_image' => 'mimes:jpg,jpeg,png,gif',
+            // 'pdf' => 'mimes:pdf',
             'date' => 'required',
             'is_featureNotice' => 'nullable|boolean'
         ]);
@@ -67,8 +67,8 @@ class EventController extends Controller
         $content->date = $validatedData['date'];
         $content->galleries_id = $validatedData['galleries_id'];
         $content->post_types_id = $validatedData['post_types_id'];
-        $content->pdf = $validatedData['feature_image'];
-        $content->pdf = $validatedData['pdf'];
+        $content->feature_image = $validatedData['feature_image'];
+        // $content->pdf = $validatedData['pdf'];
         $content->is_featureNotice = $request->has('is_featureNotice') ? 1 : 0;
 
 
@@ -117,11 +117,12 @@ class EventController extends Controller
         $content = Content::where('slug', $slug)->firstOrFail();
 
         $validatedData = $request->validate([
-            'title' => 'required|max:50',
+            'title' => 'required|max:150',
             'description' => 'required',
             'galleries_id' => '',
             'post_types_id' => 'required',
-            'pdf' => 'nullable|mimes:pdf,jpg,jpeg,png,gif,bmp', 
+            'feature_image' => 'mimes:jpg,jpeg,png,gif',
+            'pdf' => 'mimes:pdf', 
             'date' => 'nullable|date',
             'is_featureNotice' => 'nullable|boolean'
         ]);
@@ -131,6 +132,8 @@ class EventController extends Controller
         $content->description = $validatedData['description'];
         $content->galleries_id = $validatedData['galleries_id'] ?? $content->galleries_id;
         $content->post_types_id = $validatedData['post_types_id'];
+        $content->pdf = $validatedData['pdf'];
+        $content->feature_image = $validatedData['feature_image'];
         $content->date = $validatedData['date'] ?? $content->date;
         $content->is_featureNotice = $request->has('is_featureNotice') ? 1 : 0;
 
